@@ -149,6 +149,9 @@ client.on("message", async message => {
   }
 
 if(command === "ano") {
+
+  const emebed = args.join(" ");
+
   const embed = new Discord.RichEmbed()
   .setTitle("Titre")
   .setAuthor("Message Anonyme", " https://wir.skyrock.net/wir/v1/profilcrop/?c=mog&w=301&h=301&im=%2Fart%2FPRIP.92288752.5.2.jpg")
@@ -156,10 +159,8 @@ if(command === "ano") {
    * Alternatively, use "#00AE86", [0, 174, 134] or an integer number.
    */
   .setColor(0x00AE86)
-  .setDescription("This is the main body of text, it can hold 2048 characters.")
-  .setFooter("This is the footer text, it can hold 2048 characters", "http://i.imgur.com/w1vhFSR.png")
-  .setImage("http://i.imgur.com/yVpymuV.png")
-  .setThumbnail("http://i.imgur.com/p2qNFag.png")
+  .setDescription("emebed")
+  .setFooter("Garry's Bot", "https://imgur.com/a/PB5RYd2")
   /*
    * Takes a Date object, defaults to current date.
    */
@@ -171,8 +172,6 @@ if(command === "ano") {
   /*
    * Blank field, useful to create some space.
    */
-  .addBlankField(true)
-  .addField("Inline Field 3", "You can have a maximum of 25 fields.", true);
  
   message.channel.send({embed});
 }
