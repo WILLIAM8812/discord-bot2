@@ -59,7 +59,7 @@ client.on("message", async message => {
 
   if(command === "help") {
     // Help for the bots
-    return message.reply(" __**GUIDE D'AIDE**__ \n \n __**help**__ : Affiche la liste d'aide \n \n __**ping**__ : Affiche le delais en ms \n \n __**say**__ : Fait dire un message specifique au bot \n \n __**kick**__ : Permet de kick un joueur \n \n __**ban**__ : Permet de ban un joueur \n \n __**purge**__ : Permet de supprimer les messages (jusqu'a 100) \n \n __**code**__ : Permet de consultée le code open source du bot ! \n \n __**ano**__ : Permet d'envoyer un message anonyme a quelqu'un \n \n**Le préfixe est actuellemnt** ``" + prefixlol + "``");
+    return message.reply(" __**GUIDE D'AIDE**__ \n \n __**help**__ : Affiche la liste d'aide \n \n __**ping**__ : Affiche le delais en ms \n \n __**say**__ : Fait dire un message specifique au bot \n \n __**purge**__ : Permet de supprimer les messages (jusqu'a 100) \n \n __**code**__ : Permet de consultée le code open source du bot ! \n \n __**ano**__ : Permet d'envoyer un message anonyme a quelqu'un \n \n**Le préfixe est actuellemnt** ``" + prefixlol + "``");
     
   }
 
@@ -79,53 +79,7 @@ client.on("message", async message => {
     message.channel.send(sayMessage);
   }
   
-  if(command === "kick") {
-    // This command must be limited to mods and admins. In this example we just hardcode the role names.
-    // Please read on Array.some() to understand this bit: 
-    // https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/some?
-    if(!message.member.roles.some(r=>["🚀Fondateur🚀"].includes(r.name)) )
-      return message.reply("Desoler, mais tu ne peux pas faire ca !");
-    
-    // Let's first check if we have a member and if we can kick them!
-    // message.mentions.members is a collection of people that have been mentioned, as GuildMembers.
-    // We can also support getting the member by ID, which would be args[0]
-    let member = message.mentions.members.first() || message.guild.members.get(args[0]);
-    if(!member)
-      return message.reply("Merci de mentionner un utilisatuer valide ");
-    if(!member.kickable) 
-      return message.reply("Je ne peux pas kick cette utilisateur ! A t-il un role plus important ? Est ce que j'ai la permission de kick ?");
-    
-    // slice(1) removes the first part, which here should be the user mention or ID
-    // join(' ') takes all the various parts to make it a single string.
-    let reason = args.slice(1).join(' ');
-    if(!reason) reason = "Aucucne raison donner";
-    
-    // Now, time for a swift kick in the nuts!
-    await member.kick(reason)
-      .catch(error => message.reply(`Desoler ${message.author} Je ne peux pas kick car : ${error}`));
-    message.reply(`${member.user.tag} a été kicker ${message.author.tag} car : ${reason}`);
 
-  }
-  
-  if(command === "ban") {
-    // Most of this command is identical to kick, except that here we'll only let admins do it.
-    // In the real world mods could ban too, but this is just an example, right? ;)
-    if(!message.member.roles.some(r=>["🚀Fondateur🚀"].includes(r.name)) )
-      return message.reply("Desoler, mais tu ne peux pas faire ca !");
-    
-    let member = message.mentions.members.first();
-    if(!member)
-      return message.reply("Merci de mentionner un utilisatuer valide");
-    if(!member.bannable) 
-      return message.reply("Je ne peux pas kick cette utilisateur ! A t-il un role plus important ? Est ce que j'ai la permission de kick ?");
-
-    let reason = args.slice(1).join(' ');
-    if(!reason) reason = "Aucucne raison donner";
-    
-    await member.ban(reason)
-      .catch(error => message.reply(`Desoler ${message.author} Je ne pas ban car : ${error}`));
-    message.reply(`${member.user.tag} a été banni ${message.author.tag} car : ${reason}`);
-  }
   
   if(command === "purge") {
     if(!message.member.roles.some(r=>["🚀Fondateur🚀"].includes(r.name)) )
@@ -161,7 +115,7 @@ client.on("message", async message => {
   return message.reply("Merci d'écrire un titre valide");
 
 
-  const embed = new Discord.RichEmbed()
+  const embed_ano = new Discord.RichEmbed()
   .setTitle(emebed_title)
   .setAuthor("Message Anonyme", " https://wir.skyrock.net/wir/v1/profilcrop/?c=mog&w=301&h=301&im=%2Fart%2FPRIP.92288752.5.2.jpg")
   /*
@@ -181,9 +135,44 @@ client.on("message", async message => {
    * Blank field, useful to create some space.
    */
  
-  message.channel.send({embed});
+  message.channel.send({embed_ano});
 }
 
+if(command === "advert") {
+
+  const advert_text = args.join(" ");
+
+
+  message.delete().catch(O_o=>{}); 
+  
+  if(!advert_text)
+  return message.reply("Merci d'écrire un message valide");
+
+
+
+
+  const embed_advert = new Discord.RichEmbed()
+  .setTitle("Publicité")
+  .setAuthor(client.user.username, client.user.avatarURL)
+  /*
+   * Alternatively, use "#00AE86", [0, 174, 134] or an integer number.
+   */
+  .setColor("#FFD800")
+  .setDescription(advert_text)
+  .setFooter("Garry's Bot", "https://imgur.com/JR1tEkx.jpg")
+  /*
+   * Takes a Date object, defaults to current date.
+   */
+  .setTimestamp()
+  /*
+   * Inline fields may not display as inline if the thumbnail and/or image is too big.
+   */
+  /*
+   * Blank field, useful to create some space.
+   */
+ 
+  message.channel.send({embed_advert});
+}
 
 
 });
