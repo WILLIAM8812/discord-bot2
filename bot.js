@@ -161,7 +161,7 @@ client.on("message", async message => {
     if(!prefixlol2 || prefixlol2.length < 0 || prefixlol2.length > 1)
       return message.reply("Merci de mettre une seule lettre !");
     
-    prefixlol = prefixlol2;
+    prefixlol = prefixlol2.catch(O_o=>{});
 
     
       return message.reply('Le prefix a bien été changée en ' + prefixlol);
