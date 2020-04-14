@@ -148,12 +148,12 @@ client.on("message", async message => {
       .catch(error => message.reply(`Impossible de supprimer les messages car : ${error}`));
   }
 
-if(command === "emebed") {
+if(command === "ano") {
   message.channel.send({embed: {
     color: 3447003,
     author: {
-      name: client.user.username,
-      icon_url: client.user.avatarURL
+      name: "Anonyme",
+      icon_url: https://wir.skyrock.net/wir/v1/profilcrop/?c=mog&w=301&h=301&im=%2Fart%2FPRIP.92288752.5.2.jpg
     },
     title: "This is an embed",
     url: "http://google.com",
