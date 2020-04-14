@@ -1,5 +1,6 @@
 // Load up the discord.js library
-const Discord = require("discord.js");
+const Discord = require('discord.js');
+const client = new Discord.Client();
 const prefixlol = "+"
 
 // This is your client. Some people call it `bot`, some people call it `self`, 
