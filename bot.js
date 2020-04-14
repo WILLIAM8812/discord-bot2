@@ -150,7 +150,7 @@ client.on("message", async message => {
 
  if(command === "ano") {
 
-  const emebed_title = arg.join(" ");
+  const emebed_title = args.join(" ");
   const emebed_text = args.slice(1).join(' ');    
   
   if(!emebed_text)
