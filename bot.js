@@ -163,7 +163,6 @@ client.on("message", async message => {
     const prefixlol = prefixlol2;
 
     
-    client.user.setActivity(prefixlol +"help");
       return message.reply('Le prefix a bien été changée en ' + prefixlol);
       
   }
