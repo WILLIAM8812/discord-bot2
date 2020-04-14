@@ -124,7 +124,7 @@ client.on("message", async message => {
    */
   .setColor([255, 0, 0])
   .setDescription(emebed_text)
-  .setFooter("Garry's Bot", "https://imgur.com/JR1tEkx.jpg")
+  .setFooter(client.user.username, client.user.avatarURL)
   /*
    * Takes a Date object, defaults to current date.
    */
@@ -157,7 +157,7 @@ if(command === "advert") {
    */
   .setColor("#FFD800")
   .setDescription(advert_text)
-  .setFooter("Garry's Bot", "https://imgur.com/JR1tEkx.jpg")
+  .setFooter(message.author.username, message.author.avatarURL)
   /*
    * Takes a Date object, defaults to current date.
    */
