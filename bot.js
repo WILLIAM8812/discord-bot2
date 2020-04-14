@@ -148,7 +148,7 @@ client.on("message", async message => {
       .catch(error => message.reply(`Impossible de supprimer les messages car : ${error}`));
   }
 
-if(command === "ban") {
+if(command === "emebed") {
   message.channel.send({embed: {
     color: 3447003,
     author: {
