@@ -60,7 +60,7 @@ client.on("message", async message => {
   if(command === "help") {
     // Help for the bots
     const gmod = client.emojis.find(emoji => emoji.name === "gmod");
-    return message.reply(` __**GUIDE D'AIDE**__ ${gmod} \n \n __**help**__ : Affiche la liste d'aide \n \n __**ping**__ : Affiche le delais en ms \n \n __**say**__ : Fait dire un message specifique au bot \n \n __**purge**__ : Permet de supprimer les messages (jusqu'a 100) \n \n __**code**__ : Permet de consultée le code open source du bot ! \n \n __**ano**__ : Permet d'envoyer un message anonyme a quelqu'un \n \n**Le préfixe est actuellemnt**  + ${prefixlol} + `);
+    return message.reply(` __**GUIDE D'AIDE**__ ${gmod} \n \n __**help**__ : Affiche la liste d'aide \n \n __**ping**__ : Affiche le delais en ms \n \n __**say**__ : Fait dire un message specifique au bot \n \n __**purge**__ : Permet de supprimer les messages (jusqu'a 100) \n \n __**code**__ : Permet de consultée le code open source du bot ! \n \n __**ano**__ : Permet d'envoyer un message anonyme a quelqu'un \n \n**Le préfixe est actuellemnt** ${prefixlol}`);
     
   }
 
@@ -151,13 +151,13 @@ if(command === "advert") {
 
   const embed = new Discord.RichEmbed()
   .setTitle("Publicité")
-  .setAuthor(client.user.username, client.user.avatarURL)
+  .setAuthor(message.author.username, message.author.avatarURL)
   /*
    * Alternatively, use "#00AE86", [0, 174, 134] or an integer number.
    */
   .setColor("#FFD800")
   .setDescription(advert_text)
-  .setFooter(message.author.username, message.author.avatarURL)
+  .setFooter(client.user.username, client.user.avatarURL)
   /*
    * Takes a Date object, defaults to current date.
    */
