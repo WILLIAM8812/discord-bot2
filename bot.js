@@ -150,8 +150,8 @@ client.on("message", async message => {
 
  if(command === "ano") {
 
-  const emebed_text = (get(args[1]));
-  const emebed_title = (get(args[0]));
+  const emebed_text = .args[1].join(" ");
+  const emebed_title = args[0].join(" ");
   
   if(!emebed_text)
   return message.reply("Merci d'écrire un message valide");
