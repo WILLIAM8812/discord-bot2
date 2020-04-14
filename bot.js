@@ -171,7 +171,10 @@ if(command === "advert") {
   message.channel.send({embed});
 }
 
-
+if(command === "listemoji") {
+  const emojiList = message.guild.emojis.map(e=>e.toString()).join(" ");
+  message.channel.send(emojiList);
+}
 
 });
 client.login(process.env.BOT_TOKEN);
