@@ -172,7 +172,7 @@ if(command === "advert") {
   message.channel.send({embed});
 }
 
-if(command === "email") {
+if(command === "dm") {
     // Let's first check if we have a member and if we can kick them!
     // message.mentions.members is a collection of people that have been mentioned, as GuildMembers.
     // We can also support getting the member by ID, which would be args[0]
@@ -185,8 +185,7 @@ if(command === "email") {
   
       const lol46 = args.slice(1).join(' ');
 
-const email = member.user({lol46})
-message.reply (`${lol46} de ${member.user.username} : **${email}** `)
+message.member.send(lol46)
   
 }
 
