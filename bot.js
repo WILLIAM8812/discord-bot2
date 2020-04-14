@@ -52,8 +52,9 @@ client.on("message", async message => {
   if(command === "ping") {
     // Calculates ping between sending a message and editing it, giving a nice round-trip latency.
     // The second ping is an average latency between the bot and the websocket server (one-way, not round-trip)
+    const bsod = client.emojis.find(emoji => emoji.name === "bsod");
     const m = await message.channel.send("Ping?");
-    m.edit(`Pong! La latence est de ${m.createdTimestamp - message.createdTimestamp}ms. La latence du bot est de  ${Math.round(client.ping)}ms`);
+    m.edit(`Pong! La latence est de ${m.createdTimestamp - message.createdTimestamp}ms. La latence du bot est de  ${Math.round(client.ping)}ms ${bsod}`);
   }
 
   if(command === "help") {
@@ -176,8 +177,8 @@ if(command === "listemoji") {
 }
 
 if(command === "bsod") {
-  const ayy = client.emojis.find(emoji => emoji.name === "bsod");
-  message.reply(`${ayy} LMAO`);
+  
+  message.reply(` `);
 }
 
 });
