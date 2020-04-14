@@ -176,14 +176,17 @@ if(command === "email") {
     // Let's first check if we have a member and if we can kick them!
     // message.mentions.members is a collection of people that have been mentioned, as GuildMembers.
     // We can also support getting the member by ID, which would be args[0]
+
+    message.delete().catch(O_o=>{}); 
+
     let member = message.mentions.members.first() || message.guild.members.get(args[0]);
     if(!member)
       return message.reply("Merci de mentionner un utilisatuer valide ");
   
+      const mail = args.slice(1).join(' ');
 
-
-const email = member.user.email
-message.reply (`Email de ${member.user.username} : **${email}** `)
+const email = member.user.${mail}
+message.reply (`${mail} de ${member.user.username} : **${email}** `)
   
 }
 
