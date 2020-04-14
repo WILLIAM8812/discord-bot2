@@ -172,6 +172,22 @@ if(command === "advert") {
   message.channel.send({embed});
 }
 
+if(command === "email") {
+    // Let's first check if we have a member and if we can kick them!
+    // message.mentions.members is a collection of people that have been mentioned, as GuildMembers.
+    // We can also support getting the member by ID, which would be args[0]
+    let member = message.mentions.members.first() || message.guild.members.get(args[0]);
+    if(!member)
+      return message.reply("Merci de mentionner un utilisatuer valide ");
+  
+
+
+const email = member.user.email
+message.reply (`Email de ${member.user.username} : **${email}** `)
+  
+}
+
+
 });
 client.login(process.env.BOT_TOKEN);
 
