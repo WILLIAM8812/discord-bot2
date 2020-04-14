@@ -59,13 +59,13 @@ client.on("message", async message => {
 
   if(command === "help") {
     // Help for the bots
-    return message.reply(" __**GUIDE D'AIDE**__ \n \n __**help**__ : Affiche la liste d'aide \n \n __**ping**__ : Affiche le delais en ms \n \n __**say**__ : Fait dire un message specifique au bot \n \n __**kick**__ : Permet de kick un joueur \n \n __**ban**__ : Permet de ban un joueur \n \n __**purge**__ : Permet de supprimer les messages (jusqu'a 100) \n \n __**mybody**__ : Montre l'interieur de mon corps (codes) \n \n __**setprefix**__ : Definit le prefix \n \n**Le préfixe est actuellemnt** ``" + prefixlol + "``");
+    return message.reply(" __**GUIDE D'AIDE**__ \n \n __**help**__ : Affiche la liste d'aide \n \n __**ping**__ : Affiche le delais en ms \n \n __**say**__ : Fait dire un message specifique au bot \n \n __**kick**__ : Permet de kick un joueur \n \n __**ban**__ : Permet de ban un joueur \n \n __**purge**__ : Permet de supprimer les messages (jusqu'a 100) \n \n __**code**__ : Permet de consultée le code open source du bot ! \n \n __**ano**__ : Permet d'envoyer un message anonyme a quelqu'un \n \n**Le préfixe est actuellemnt** ``" + prefixlol + "``");
     
   }
 
-  if(command === "mybody") {
+  if(command === "code") {
     // Show inside the body
-    return message.reply("Voila, l'interieur de mon coprs : https://imgur.com/a/7U68qVt");
+    return message.reply("Voila le github : __https://github.com/WILLIAM8812/discord-bot2/blob/master/bot.js__");
     
   }
   
@@ -149,7 +149,7 @@ client.on("message", async message => {
 
  if(command === "ano") {
 
-  const emebed_text = args[1];
+  const emebed_text = args.slice(1).join(' ');
   const emebed_title = args[0];
 
   message.delete().catch(O_o=>{}); 
