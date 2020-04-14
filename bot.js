@@ -167,7 +167,7 @@ client.on("message", async message => {
   /*
    * Alternatively, use "#00AE86", [0, 174, 134] or an integer number.
    */
-  .setColor(0x00AE86)
+  .setColor([255, 0, 0])
   .setDescription(emebed_text)
   .setFooter("Garry's Bot", "https://imgur.com/JR1tEkx.jpg")
   /*
