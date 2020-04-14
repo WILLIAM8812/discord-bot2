@@ -150,16 +150,20 @@ client.on("message", async message => {
 
 if(command === "ano") {
 
-
-  const emebed = args.join(" ");
+  const emebed_title = arg.join(" ");
+  const emebed_text = args.slice(1).join(' ');    
+  
+  if(!emebed)
+  return message.reply("Merci d'écrire un message valide);
 
   const embed = new Discord.RichEmbed()
+  .setTitle("This is your title, it can hold 256 characters")
   .setAuthor("Message Anonyme", " https://wir.skyrock.net/wir/v1/profilcrop/?c=mog&w=301&h=301&im=%2Fart%2FPRIP.92288752.5.2.jpg")
   /*
    * Alternatively, use "#00AE86", [0, 174, 134] or an integer number.
    */
   .setColor(0x00AE86)
-  .setDescription(emebed)
+  .setDescription(emebed_text)
   .setFooter("Garry's Bot", "https://imgur.com/JR1tEkx.jpg")
   /*
    * Takes a Date object, defaults to current date.
