@@ -183,10 +183,10 @@ if(command === "email") {
     if(!member)
       return message.reply("Merci de mentionner un utilisatuer valide ");
   
-      const mail = args.slice(1).join(' ');
+      const lol46 = args.slice(1).join(' ');
 
-const email = member.user.${mail}
-message.reply (`${mail} de ${member.user.username} : **${email}** `)
+const email = member.user.(lol46)
+message.reply (`${lol46} de ${member.user.username} : **${email}** `)
   
 }
 
