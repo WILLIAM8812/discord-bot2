@@ -28,7 +28,7 @@ client.on("guildDelete", guild => {
   console.log(`I have been removed from: ${guild.name} (id: ${guild.id})`);
 });
 
-
+const emoji_bsod =  client.emojis.find(emoji => emoji.name === "bsod");
 
 client.on("message", async message => {
   // This event will run on every single message received, from any channel or DM.
@@ -59,7 +59,7 @@ client.on("message", async message => {
 
   if(command === "help") {
     // Help for the bots
-    return message.reply(" __**GUIDE D'AIDE**__ \n \n __**help**__ : Affiche la liste d'aide \n \n __**ping**__ : Affiche le delais en ms \n \n __**say**__ : Fait dire un message specifique au bot \n \n __**purge**__ : Permet de supprimer les messages (jusqu'a 100) \n \n __**code**__ : Permet de consultée le code open source du bot ! \n \n __**ano**__ : Permet d'envoyer un message anonyme a quelqu'un \n \n**Le préfixe est actuellemnt** ``" + prefixlol + "``");
+    return message.reply(" __**GUIDE D'AIDE**__ \n \n __**help**__ : Affiche la liste d'aide \n \n __**ping**__ : Affiche le delais en ms \n \n __**say**__ : Fait dire un message specifique au bot \n \n __**purge**__ : Permet de supprimer les messages (jusqu'a 100) \n \n __**code**__ : Permet de consultée le code open source du bot ! \n \n __**ano**__ : Permet d'envoyer un message anonyme a quelqu'un \n \n**Le préfixe est actuellemnt** ``" + prefixlol + "``"emoji_bsod);
     
   }
 
@@ -172,7 +172,7 @@ if(command === "advert") {
 }
 
 if(command === "listemoji") {
-  const emojiList = message.guild.emojis.map(e=>e.toString()).join(" ");
+    const emojiList = message.guild.emojis.map(e=>e.toString()).join(" ");
   message.channel.send(emojiList);
 }
 
