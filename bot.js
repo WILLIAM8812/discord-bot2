@@ -160,7 +160,7 @@ client.on("message", async message => {
     if(!prefixlol2 || prefixlol2.length < 0 || prefixlol2.length > 1)
       return message.reply("Merci de mettre une seule lettre !");
     
-    prefixlol = prefixlol2;
+    const prefixlol = prefixlol2;
 
     
     client.user.setActivity(prefixlol +"help");
