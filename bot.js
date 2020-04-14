@@ -115,7 +115,7 @@ client.on("message", async message => {
   return message.reply("Merci d'écrire un titre valide");
 
 
-  const embed_ano = new Discord.RichEmbed()
+  const embed = new Discord.RichEmbed()
   .setTitle(emebed_title)
   .setAuthor("Message Anonyme", " https://wir.skyrock.net/wir/v1/profilcrop/?c=mog&w=301&h=301&im=%2Fart%2FPRIP.92288752.5.2.jpg")
   /*
@@ -135,13 +135,12 @@ client.on("message", async message => {
    * Blank field, useful to create some space.
    */
  
-  message.channel.send({embed_ano});
+  message.channel.send({embed});
 }
 
 if(command === "advert") {
 
   const advert_text = args.join(" ");
-
 
   message.delete().catch(O_o=>{}); 
   
@@ -149,9 +148,7 @@ if(command === "advert") {
   return message.reply("Merci d'écrire un message valide");
 
 
-
-
-  const embed_advert = new Discord.RichEmbed()
+  const embed = new Discord.RichEmbed()
   .setTitle("Publicité")
   .setAuthor(client.user.username, client.user.avatarURL)
   /*
@@ -171,7 +168,7 @@ if(command === "advert") {
    * Blank field, useful to create some space.
    */
  
-  message.channel.send({embed_advert});
+  message.channel.send({embed});
 }
 
 
