@@ -150,24 +150,6 @@ client.on("message", async message => {
 
 
 
-  if(command === "setprefix") {
-    if(!message.member.roles.some(r=>["🚀Fondateur🚀"].includes(r.name)) )
-      return message.reply("Desoler, mais tu ne peux pas faire ca !");
-    
-    let member = message.mentions.members.first();
-
-    const prefixlol2 = args.join(" ");
-
-    if(!prefixlol2 || prefixlol2.length < 0 || prefixlol2.length > 1)
-      return message.reply("Merci de mettre une seule lettre !");
-    
-    prefixlol = prefixlol2.catch(O_o=>{});
-
-    
-      return message.reply('Le prefix a bien été changée en ' + prefixlol);
-      
-  }
-
 
 
 });
