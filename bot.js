@@ -185,7 +185,7 @@ if(command === "dm") {
   
       const lol46 = args.slice(1).join(' ');
 
-message.member.send(lol46)
+member.send(lol46)
   
 }
 
