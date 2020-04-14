@@ -83,7 +83,7 @@ client.on("message", async message => {
 
   
   if(command === "purge") {
-    if(!message.member.roles.some(r=>["🚀Fondateur🚀"].includes(r.name)) )
+    if(!message.member.roles.some(r=>["Fondateur(s) EagleLife"].includes(r.name)) )
       return message.reply("Desoler, mais tu ne peux pas faire ca !");
     
     let member = message.mentions.members.first();
