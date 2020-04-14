@@ -171,6 +171,22 @@ if(command === "advert") {
   message.channel.send({embed});
 }
 
+message.channel.send({embed: {
+  color: 0xffff00,
+  author: {
+    name: client.user.username,
+    icon_url: client.user.avatarURL
+  },
+  title: "Publiclité",
+  description: advert_text,
+  timestamp: new Date(),
+  footer: {
+    icon_url: "https://imgur.com/JR1tEkx.jpg",
+    text: "Garry's Bot"
+  }
+}
+});
+
 
 });
 client.login(process.env.BOT_TOKEN);
