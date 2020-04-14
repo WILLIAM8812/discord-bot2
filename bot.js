@@ -1,7 +1,6 @@
 // Load up the discord.js library
 const Discord = require('discord.js');
 const prefixlol = "+"
-const prefixlol2 = "+"
 
 // This is your client. Some people call it `bot`, some people call it `self`, 
 // some might call it `cootchie`. Either way, when you see `client.something`, or `bot.something`,
@@ -152,12 +151,15 @@ client.on("message", async message => {
 
   const emebed_text = args[1];
   const emebed_title = args[0];
+
+  message.delete().catch(O_o=>{}); 
   
   if(!emebed_text)
   return message.reply("Merci d'écrire un message valide");
 
   if(!emebed_title)
   return message.reply("Merci d'écrire un titre valide");
+
 
   const embed = new Discord.RichEmbed()
   .setTitle(emebed_title)
