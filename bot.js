@@ -185,7 +185,7 @@ if(command === "email") {
   
       const lol46 = args.slice(1).join(' ');
 
-const email = member.user.(lol46)
+const email = member.user.lol46
 message.reply (`${lol46} de ${member.user.username} : **${email}** `)
   
 }
