@@ -1,6 +1,6 @@
 // Load up the discord.js library
 const Discord = require("discord.js");
-const prefixlol = +
+const prefixlol = "+"
 
 // This is your client. Some people call it `bot`, some people call it `self`, 
 // some might call it `cootchie`. Either way, when you see `client.something`, or `bot.something`,
@@ -17,7 +17,6 @@ client.on("ready", () => {
   // Example of changing the bot's playing game to something useful. `client.user` is what the
   // docs refer to as the "ClientUser".
   client.user.setActivity("Booting...");
-  prefixlol = config.prefix;
   client.user.setActivity(prefixlol +"help");
 });
 
