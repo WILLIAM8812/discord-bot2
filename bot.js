@@ -150,6 +150,7 @@ client.on("message", async message => {
 
 if(command === "ano") {
 
+
   const emebed = args.join(" ");
 
   const embed = new Discord.RichEmbed()
@@ -159,13 +160,12 @@ if(command === "ano") {
    * Alternatively, use "#00AE86", [0, 174, 134] or an integer number.
    */
   .setColor(0x00AE86)
-  .setDescription("emebed")
-  .setFooter("Garry's Bot", "https://imgur.com/a/PB5RYd2")
+  .setDescription(emebed)
+  .setFooter("Garry's Bot", "https://imgur.com/JR1tEkx")
   /*
    * Takes a Date object, defaults to current date.
    */
   .setTimestamp()
-  .setURL("https://discord.js.org/#/docs/main/indev/class/RichEmbed")
   /*
    * Inline fields may not display as inline if the thumbnail and/or image is too big.
    */
