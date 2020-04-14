@@ -147,30 +147,6 @@ if(command === "advert") {
   if(!advert_text)
   return message.reply("Merci d'écrire un message valide");
 
-
-  const embed = new Discord.RichEmbed()
-  .setTitle("Publicité")
-  .setAuthor(client.user.username, client.user.avatarURL)
-  /*
-   * Alternatively, use "#00AE86", [0, 174, 134] or an integer number.
-   */
-  .setColor("#FFD800")
-  .setDescription(advert_text)
-  .setFooter("Garry's Bot", "https://imgur.com/JR1tEkx.jpg")
-  /*
-   * Takes a Date object, defaults to current date.
-   */
-  .setTimestamp()
-  /*
-   * Inline fields may not display as inline if the thumbnail and/or image is too big.
-   */
-  /*
-   * Blank field, useful to create some space.
-   */
- 
-  message.channel.send({embed});
-}
-
 message.channel.send({embed: {
   color: 0xffff00,
   author: {
