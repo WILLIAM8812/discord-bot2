@@ -190,10 +190,13 @@ member.send(lol46)
 }
 
 if(command === "election") {
+
+  message.delete().catch(O_o=>{}); 
+
   const election_texte = args.join(" ");
 
     const embed = new Discord.RichEmbed()
-    .setTitle("Publicité")
+    .setTitle("Election")
     .setAuthor(message.author.username, message.author.avatarURL)
     .setColor("#FFD800")
     .setDescription(election_texte)
