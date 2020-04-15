@@ -200,6 +200,8 @@ if(command === "vote") {
     .addField("Répondre avec ✅")
     .setTimestamp()
     message.channel.send({embed})
+    .then(function (message) {
+
       message.react("✅")
       const filter = (reaction) => {
         return reaction.emoji.name === '✅' || reaction.emoji.name === '❌'
@@ -233,9 +235,11 @@ if(command === "vote") {
         var election_vote = "0";
         const election_encours = "0";
       });
+       
     
-    ;
-      
+    }).catch(function() {
+
+    });
 }
 
 
