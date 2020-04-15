@@ -189,6 +189,7 @@ if(command === "vote") {
     return message.reply("Désoler mais un vote est deja en cours");
 
   var election_encours = "1";
+  console.log("Vote started");
 
     const embed = new Discord.RichEmbed()
     .setTitle(election_titre)
