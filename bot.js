@@ -1,8 +1,6 @@
 // Load up the discord.js library
 const Discord = require('discord.js');
 const prefixlol = "+"
-const election_encours = "encours";
-var election_vote = "0";
 
 
 
@@ -188,12 +186,9 @@ if(command === "vote") {
   const election_texte = args.slice(1).join(' ');
   const election_titre = args[0];
 
-  if(!election_texte || election_encours === "encours")
-    return message.reply("Erreur");
+  if(!election_texte)
+    return message.reply("Erreur, veullez mettre un titre et du texte");
 
-  var election_encours = "1";
-  console.log(`election_encours = ${election_encours}`);
-  console.log("vote started");
 
     const embed = new Discord.RichEmbed()
     .setTitle(election_titre)
