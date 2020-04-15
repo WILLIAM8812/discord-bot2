@@ -195,9 +195,7 @@ message.delete().catch(O_o=>{});
 
    const texte_election = args.join(" ");
     message.reply(`${message.author.username} a démarrer une éléction : ${texte_election} \n __Appuyer sur 👌 pour voter pour lui__`);
-
-      const id_message = channel.last_message_id;
-      id_message.react('👌');
+      message.react('👌');
 
   const filter = (reaction, user) => {
     return reaction.emoji.name === '👌' 
