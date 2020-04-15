@@ -20,7 +20,16 @@ client.on("ready", () => {
   console.log(`Bot has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds.`); 
   // Example of changing the bot's playing game to something useful. `client.user` is what the
   // docs refer to as the "ClientUser".
+  client.user.setStatus('idle')
+  client.user.setPresence({
+    activity: {
+          name: 'En Mise a jour',
+          type: "STREAMING",
+          url: "https://github.com/WILLIAM8812/discord-bot2/blob/master/bot.js://.com/"
+      }
+  });
 });
+
 
 client.on("guildCreate", guild => {
   // This event triggers when the bot joins a guild.
