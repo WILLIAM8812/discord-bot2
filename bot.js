@@ -202,10 +202,12 @@ if(command === "election") {
     .setDescription(election_texte)
     .setFooter(client.user.username, client.user.avatarURL)
     .setTimestamp()
-    message.channel.send({embed});
-
+    message.channel.send({embed})
+    .then(function (message){
       message.react("✔")
       message.react("✘")
+    }).catch(function() {
+    });
 
 
   const filter = (reaction, user) => {
