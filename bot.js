@@ -1,8 +1,8 @@
 // Load up the discord.js library
 const Discord = require('discord.js');
 const prefixlol = "+"
-const agree = "✅";
-const disagree = "❌";
+var election_encours = "0";
+var election_vote = "0";
 
 // This is your client. Some people call it `bot`, some people call it `self`, 
 // some might call it `cootchie`. Either way, when you see `client.something`, or `bot.something`,
@@ -57,19 +57,42 @@ client.on("message", async message => {
     const bsod = client.emojis.find(emoji => emoji.name === "bsod");
     const m = await message.channel.send("Ping?");
     m.edit(`Pong! La latence est de ${m.createdTimestamp - message.createdTimestamp}ms. La latence du bot est de  ${Math.round(client.ping)}ms ${bsod}`);
+
+    exports.help = {
+      name: "ping",
+      category: "Général",
+      description: "Cette commande vous permet d'afficher la latence.",
+      usage: "ping"
+    };
   }
 
   if(command === "help") {
     // Help for the bots
-    const gmod = client.emojis.find(emoji => emoji.name === "gmod");
-    return message.reply(` __**GUIDE D'AIDE**__ ${gmod} \n \n __**help**__ : Affiche la liste d'aide \n \n __**ping**__ : Affiche le delais en ms \n \n __**say**__ : Fait dire un message specifique au bot \n \n __**purge**__ : Permet de supprimer les messages (jusqu'a 100) \n \n __**code**__ : Permet de consultée le code open source du bot ! \n \n __**ano**__ : Permet d'envoyer un message anonyme a quelqu'un \n __(+ano [Titre sans espace] [Texte])__ \n \n __**advert**__ : Permet d'envoyer une publicité \n __(+advert [Texte])__ \n \n **__vote__** : Permet de créer un vote \n __(+vote [Titre sans espace] [Texte]) \n \n **Le préfixe est actuellemnt** ${prefixlol}`);
+    const command = this.client.commands
+    .map((cmd) => `**${cmd.help.name}** \n${cmd.help.category} \n${cmd.help.description} \n${cmd.help.usage}`)
+    .join("\n");
+
+console.log(command);
+
+exports.help = {
+  name: "help",
+  category: "Général",
+  description: "Cette commande vous permet d'afficher l'aide.'",
+  usage: "help"
+};
     
   }
 
   if(command === "code") {
-    // Show inside the body
-    return message.reply("Voila le github : __https://github.com/WILLIAM8812/discord-bot2/blob/master/bot.js__");
-    
+  message.reply("Voila le github : __https://github.com/WILLIAM8812/discord-bot2/blob/master/bot.js__");
+  
+  exports.help = {
+    name: "code",
+    category: "Général",
+    description: "Cette commande vous permet d'afficher le code open-source du bot",
+    usage: "code"
+  };
+      
   }
   
   if(command === "say") {
@@ -80,6 +103,13 @@ client.on("message", async message => {
     message.delete().catch(O_o=>{}); 
     // And we get the bot to say the thing: 
     message.channel.send(sayMessage);
+
+    exports.help = {
+      name: "vote",
+      category: "Général",
+      description: "Cette commande vous permet de faire dire qq. au bot.",
+      usage: "say <texte>"
+    };
   }
   
 
@@ -102,6 +132,13 @@ client.on("message", async message => {
     const fetched = await message.channel.fetchMessages({limit: deleteCount});
     message.channel.bulkDelete(fetched)
       .catch(error => message.reply(`Impossible de supprimer les messages car : ${error}`));
+
+      exports.help = {
+        name: "purge",
+        category: "Général",
+        description: "Cette commande vous permet de supprimer un nombre de message.",
+        usage: "purge <nombre entre 2 et 100>"
+      };
   }
 
  if(command === "ano") {
@@ -139,6 +176,13 @@ client.on("message", async message => {
    */
  
   message.channel.send({embed});
+
+  exports.help = {
+    name: "ano",
+    category: "Général",
+    description: "Cette commande vous permet de faire un message anonyme.",
+    usage: "ano <Question sans espace> <Texte>"
+  };
 }
 
 if(command === "advert") {
@@ -172,83 +216,82 @@ if(command === "advert") {
    */
  
   message.channel.send({embed});
+
+  exports.help = {
+    name: "advert",
+    category: "Général",
+    description: "Cette commande vous permet de faire une publicité.",
+    usage: "advert <Texte>"
+  };
 }
 
 
 if(command === "vote") {
 
-  exports.run = async (client, message, args, level) => {
-    // On efface la commande.
-    message.delete();
-  
-    // Variables
-      let params = args.splice(0).join(" ").split("|");
-      let pollTitle = params[0];
-      let pollQuestion = params[1];
-      let pollTime = params[2] || 0;
-      let pollAuthor = message.author.username;
-      let pollTimeReaction;
-      let pollTimeUnity;
-  
-      // On vérifie qu'il ne manque aucun paramètre
-    if (params.length < 1)
-    {
-      return message.author.send(`Il manque des paramètres dans cette fonction.`);
-      }
-  
-      // Si le premier paramètre est "aide" ou "help", ça donne une info.
-      if (params[0] == "aide" || params[0] == "help")
-      {
-          return message.author.send(`Utilisation : !sondage <Titre>|<Question du sondage>|<Temps en millisecondes>`);
-      }
-      
-      if (pollTime >= 86400000)
-      {
-          pollTimeReaction = Math.floor(pollTime / 86400000);
-          pollTimeUnity = "jours";
-      }
-      else if (pollTime >= 3600000)
-      {
-          pollTimeReaction = Math.floor(pollTime / 3600000);
-          pollTimeUnity = "heures";
-      }
-      else if (pollTime >= 60000)
-      {
-          pollTimeReaction = Math.floor(pollTime / 60000);
-          pollTimeUnity = "minutes";
-      }
-      else
-      {
-          pollTimeReaction = Math.floor(pollTime / 1000);
-          pollTimeUnity = "secondes";
-      }
-  
-    let pollEmbed = new Discord.RichEmbed()
-      .setTitle(`Sondage : ${pollTitle}`)
-      .setDescription(pollQuestion)
-          .setFooter(`Sondage de ${pollAuthor}. Le sondage prendra fin dans ${pollTimeReaction} ${pollTimeUnity}.`);
-  
-    let pollMessage = await message.channel.send(pollEmbed);
-    
-      await pollMessage.react(agree);
-      await pollMessage.react(disagree);
-    
-      // On crée une collection des réactions
-    const reactions = await pollMessage.awaitReactions(reaction => reaction.emoji.name === agree || reaction.emoji.name === disagree, { max: 1, time: pollTime });
-      const agreeCount = reactions.get(agree).count-1;
-      const disagreeCount = reactions.get(disagree).count-1;
-  
-    let resultsEmbed = new Discord.RichEmbed()
-      .setTitle("Résultats du sondage")
-      .setDescription(`${pollQuestion}`)
-      .addField(agree, `${agreeCount} vote(s)`, true)
-      .addField(disagree, `${disagreeCount} vote(s)`, true)
-          .setFooter(`Sondage de ${pollAuthor}`);
-  
-    message.channel.send(resultsEmbed);
-    pollMessage.delete(0);
-  };
+  message.delete().catch(O_o=>{}); 
 
+  const election_texte = args.slice(1).join(' ');
+  const election_titre = args[0];
+
+  if(!election_texte)
+    return message.reply("Merci d'écrire un message valide");
+
+  if(election_encours === "1")
+    return message.reply("Désoler mais un vote est deja en cours");
+
+  var election_encours = "1";
+  console.log("vote started");
+
+    const embed = new Discord.RichEmbed()
+    .setTitle(election_titre)
+    .setAuthor(message.author.username, message.author.avatarURL)
+    .setColor("#FFD800")
+    .setDescription(election_texte)
+    .setFooter(client.user.username, client.user.avatarURL)
+    .setTimestamp()
+    message.channel.send({embed})
+    
+      message.react("✅")
+      const filter = (reaction) => {
+        return reaction.emoji.name === '✅' || reaction.emoji.name === '❌'
+      };
+      
+      const collector = message.createReactionCollector(filter);
+      
+      collector.on('collect', (reaction, reactionCollector) => {
+        if(reaction.emoji.name === '❌') {
+          console.log(`Collected ${reaction.emoji.name}`);
+          collector.stop()
+        }else{
+          console.log(`Collected ${reaction.emoji.name}`);
+          election_vote++;
+          console.log(`Nbr d'emoji = ${election_vote}`);
+        }
+
+      });
+      
+      collector.on('end', collected => {
+        console.log(`Collected ${collected.size} items, stop`);
+
+        const embed = new Discord.RichEmbed()
+        .setTitle(`Le vote précédent c'est arréter avec **__${election_vote} vote(s) positifs__**`)
+        .setAuthor("Vote términée", "https://previews.123rf.com/images/r7cky/r7cky1610/r7cky161000014/66668278-liste-de-v%C3%A9rification-du-vote-logo.jpg")
+        .setColor("#43FF51 ")
+        .setFooter(client.user.username, client.user.avatarURL)
+        .setTimestamp()
+        message.channel.send({embed})
+
+        const election_vote = "0";
+        const election_encours = "0";
+      });
+    
+    ;
+    exports.help = {
+      name: "vote",
+      category: "Général",
+      description: "Cette commande vous permet de faire un sondage auprès de vos membres.",
+      usage: "vote <Question sans espace> <Texte> , répondez ❌ pour le fermer"
+    };
 }
 
 
