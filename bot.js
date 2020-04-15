@@ -191,6 +191,8 @@ member.send(lol46)
 
 if(command === "election") {
 
+message.delete().catch(O_o=>{}); 
+
    const texte_election = args.join(" ");
     message.channel.send(`${message.author.username} a démarrer une éléction : ${texte_election} \n __Appuyer sur 👌 pour voter pour lui__`);
     message.react('👌');
