@@ -180,6 +180,9 @@ if(command === "vote") {
   const election_texte = args.slice(1).join(' ');
   const election_titre = args[0];
 
+  if(!election_texte)
+    return message.reply("Merci d'écrire un message valide");
+
     const embed = new Discord.RichEmbed()
     .setTitle(election_titre)
     .setAuthor(message.author.username, message.author.avatarURL)
@@ -210,7 +213,7 @@ if(command === "vote") {
         console.log(`Collected ${collected.size} items`);
 
         const embed = new Discord.RichEmbed()
-        .setTitle(`Le vote précédent c'est arréter avec **__${collected.size-1} vote(s) positifs__**`)
+        .setTitle(`Le vote précédent c'est arréter avec **__${collected.size} vote(s) positifs__**`)
         .setAuthor("Vote términée", "https://previews.123rf.com/images/r7cky/r7cky1610/r7cky161000014/66668278-liste-de-v%C3%A9rification-du-vote-logo.jpg")
         .setColor("#43FF51 ")
         .setFooter(client.user.username, client.user.avatarURL)
