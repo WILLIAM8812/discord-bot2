@@ -197,9 +197,9 @@ if(command === "vote") {
     .setColor("#FFD800")
     .setDescription(election_texte)
     .setFooter(client.user.username, client.user.avatarURL)
+    .addField("Répondre avec ✅")
     .setTimestamp()
     message.channel.send({embed})
-    
       message.react("✅")
       const filter = (reaction) => {
         return reaction.emoji.name === '✅' || reaction.emoji.name === '❌'
@@ -230,7 +230,7 @@ if(command === "vote") {
         .setTimestamp()
         message.channel.send({embed})
 
-        const election_vote = "0";
+        var election_vote = "0";
         const election_encours = "0";
       });
     
