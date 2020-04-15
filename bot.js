@@ -223,7 +223,16 @@ if(command === "election") {
       
       collector.on('end', collected => {
         console.log(`Collected ${collected.size} items`);
-        message.channel.send(` l'éléction s'est arrété a ${collected.size-1}`);
+
+        const embed = new Discord.RichEmbed()
+        .setTitle("Election")
+        .setAuthor(message.author.username, message.author.avatarURL)
+        .setColor("#43FF51 ")
+        .setDescription(`L'éléction de ${message.author.user} c'est arréter avec __${collected.size-1}__ vote(s)`)
+        .setFooter(client.user.username, client.user.avatarURL)
+        .setTimestamp()
+        message.channel.send({embed})
+
       });
     }).catch(function() {
     });
