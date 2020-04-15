@@ -60,7 +60,7 @@ client.on("message", async message => {
   if(command === "help") {
     // Help for the bots
     const gmod = client.emojis.find(emoji => emoji.name === "gmod");
-    return message.reply(` __**GUIDE D'AIDE**__ ${gmod} \n \n __**help**__ : Affiche la liste d'aide \n \n __**ping**__ : Affiche le delais en ms \n \n __**say**__ : Fait dire un message specifique au bot \n \n __**purge**__ : Permet de supprimer les messages (jusqu'a 100) \n \n __**code**__ : Permet de consultée le code open source du bot ! \n \n __**ano**__ : Permet d'envoyer un message anonyme a quelqu'un \n __(+ano [Titre sans espace] [Texte])__ \n \n __**advert**__ : Permet d'envoyer une publicité \n __(+advert [Texte])__ \n \n **Le préfixe est actuellemnt** ${prefixlol}`);
+    return message.reply(` __**GUIDE D'AIDE**__ ${gmod} \n \n __**help**__ : Affiche la liste d'aide \n \n __**ping**__ : Affiche le delais en ms \n \n __**say**__ : Fait dire un message specifique au bot \n \n __**purge**__ : Permet de supprimer les messages (jusqu'a 100) \n \n __**code**__ : Permet de consultée le code open source du bot ! \n \n __**ano**__ : Permet d'envoyer un message anonyme a quelqu'un \n __(+ano [Titre sans espace] [Texte])__ \n \n __**advert**__ : Permet d'envoyer une publicité \n __(+advert [Texte])__ \n \n **__vote__** : Permet de créer un vote \n __(+vote [Titre sans espace] [Texte]) \n \n **Le préfixe est actuellemnt** ${prefixlol}`);
     
   }
 
@@ -172,31 +172,16 @@ if(command === "advert") {
   message.channel.send({embed});
 }
 
-if(command === "dm") {
-    // Let's first check if we have a member and if we can kick them!
-    // message.mentions.members is a collection of people that have been mentioned, as GuildMembers.
-    // We can also support getting the member by ID, which would be args[0]
 
-    message.delete().catch(O_o=>{}); 
-
-    let member = message.mentions.members.first() || message.guild.members.get(args[0]);
-    if(!member)
-      return message.reply("Merci de mentionner un utilisatuer valide ");
-  
-      const lol46 = args.slice(1).join(' ');
-
-member.send(lol46)
-  
-}
-
-if(command === "election") {
+if(command === "vote") {
 
   message.delete().catch(O_o=>{}); 
 
-  const election_texte = args.join(" ");
+  const election_texte = args.slice(1).join(' ');
+  const election_titre = args[0];
 
     const embed = new Discord.RichEmbed()
-    .setTitle("Election")
+    .setTitle(election_titre)
     .setAuthor(message.author.username, message.author.avatarURL)
     .setColor("#FFD800")
     .setDescription(election_texte)
@@ -225,10 +210,9 @@ if(command === "election") {
         console.log(`Collected ${collected.size} items`);
 
         const embed = new Discord.RichEmbed()
-        .setTitle("Election")
-        .setAuthor(message.author.username, message.author.avatarURL)
+        .setTitle(`Le vote précédent c'est arréter avec **__${collected.size-1} vote(s) positifs__**`)
+        .setAuthor("Vote términée", "https://previews.123rf.com/images/r7cky/r7cky1610/r7cky161000014/66668278-liste-de-v%C3%A9rification-du-vote-logo.jpg")
         .setColor("#43FF51 ")
-        .setDescription(`L'éléction de ${message.author.user} c'est arréter avec __${collected.size-1}__ vote(s)`)
         .setFooter(client.user.username, client.user.avatarURL)
         .setTimestamp()
         message.channel.send({embed})
