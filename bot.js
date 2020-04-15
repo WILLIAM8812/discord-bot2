@@ -185,13 +185,13 @@ if(command === "vote") {
 
 
     const embed = new Discord.RichEmbed()
-    .setTitle(election_titre)
+    .setTitle(Vote)
     .setAuthor(message.author.username, message.author.avatarURL)
     .setColor("#FFD800")
     .setDescription(election_texte)
     .setFooter("Répondre avec ✅ ou ❌", client.user.avatarURL)
     .setTimestamp()
-    message.guild.channels.find("name", election_channel).send({embed})
+    message.channel.send({embed})
       .then(function(message) {
         message.react("✅")
         message.react("❌")
