@@ -191,7 +191,7 @@ if(command === "vote") {
     .setDescription(election_texte)
     .setFooter("Répondre avec ✅ ou ❌", client.user.avatarURL)
     .setTimestamp()
-    message.guild.channels.find("id", election_channel).send({embed});
+    message.guild.channels.find("id", election_channel).send({embed})
       .then(function(message) {
         message.react("✅")
         message.react("❌")
