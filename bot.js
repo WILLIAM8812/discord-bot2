@@ -205,26 +205,21 @@ if(command === "election") {
     message.channel.send({embed})
     .then(function (message){
       message.react("✔")
+      const filter = (reaction, user) => {
+        return reaction.emoji.name === '✔' 
+      };
+      
+      const collector = message.createReactionCollector(filter);
+      
+      collector.on('collect', (reaction, reactionCollector) => {
+        console.log(`Collected ${reaction.emoji.name}`);
+      });
+      
+      collector.on('end', collected => {
+        console.log(`Collected ${collected.size} items`);
+      });
     }).catch(function() {
     });
-
-
-  const filter = (reaction, user) => {
-    return reaction.emoji.name === '✔' 
-  };
-  
-  const collector = message.createReactionCollector(filter);
-  
-  collector.on('collect', (reaction, reactionCollector) => {
-    console.log(`Collected ${reaction.emoji.name}`);
-  });
-  
-  collector.on('end', collected => {
-    console.log(`Collected ${collected.size} items`);
-  });
-    
-
-
 
 }
 
