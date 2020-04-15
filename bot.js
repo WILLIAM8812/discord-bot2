@@ -1,6 +1,8 @@
 // Load up the discord.js library
 const Discord = require('discord.js');
 const prefixlol = "+"
+const election_encours = "0"
+const election_vote = "0"
 
 // This is your client. Some people call it `bot`, some people call it `self`, 
 // some might call it `cootchie`. Either way, when you see `client.something`, or `bot.something`,
@@ -183,6 +185,9 @@ if(command === "vote") {
   if(!election_texte)
     return message.reply("Merci d'écrire un message valide");
 
+  if(election_encours === "1")
+    return message.reply("Désoler mais un vote est deja en cours")
+
     const embed = new Discord.RichEmbed()
     .setTitle(election_titre)
     .setAuthor(message.author.username, message.author.avatarURL)
@@ -205,12 +210,16 @@ if(command === "vote") {
           collector.stop()
         }else{
           console.log(`Collected ${reaction.emoji.name}`);
+          election_vote++;
+          console.log(`Nbr d'emoji = ${election_vote}`);
         }
 
       });
       
       collector.on('end', collected => {
-        console.log(`Collected ${collected.size} items`);
+        console.log(`Collected ${collected.size} items, stop`);
+        election_encours = "0"
+        election_vote = "0"
 
         const embed = new Discord.RichEmbed()
         .setTitle(`Le vote précédent c'est arréter avec **__${collected.size} vote(s) positifs__**`)
