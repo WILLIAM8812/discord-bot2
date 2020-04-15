@@ -55,7 +55,7 @@ client.on("message", async message => {
     const embed = new Discord.RichEmbed()
     .setAuthor("Liste d'aide", "https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Information.svg/2000px-Information.svg.png")
     .setColor("#FFD800")
-    .setDescription(`__**help**__ : Affiche la liste d'aide \n \n __**ping**__ : Affiche le delais en ms \n \n __**say**__ : Fait dire un message specifique au bot \n \n __**purge**__ : Permet de supprimer les messages (jusqu'a 100) \n \n __**code**__ : Permet de consultée le code open source du bot ! \n \n __**ano**__ : Permet d'envoyer un message anonyme a quelqu'un \n __(+ano [Titre sans espace] [Texte])__ \n \n __**advert**__ : Permet d'envoyer une publicité \n __(+advert [Texte])__ \n \n **__vote__** : Permet de créer un vote \n __(+vote [Titre sans espace] [Nom du channel] [Texte])__ \n \n **Le préfixe est actuellemnt** ${prefixlol}`)
+    .setDescription(`__**help**__ : Affiche la liste d'aide \n \n __**ping**__ : Affiche le delais en ms \n \n __**say**__ : Fait dire un message specifique au bot \n \n __**purge**__ : Permet de supprimer les messages (jusqu'a 100) \n \n __**code**__ : Permet de consultée le code open source du bot ! \n \n __**ano**__ : Permet d'envoyer un message anonyme a quelqu'un \n __(+ano [Titre sans espace] [Texte])__ \n \n __**advert**__ : Permet d'envoyer une publicité \n __(+advert [Texte])__ \n \n **__vote__** : Permet de créer un vote \n __(+vote [Titre sans espace] [Texte])__ \n \n **Le préfixe est actuellemnt** ${prefixlol}`)
     .setTimestamp()
     .setFooter(client.user.username, client.user.avatarURL)
     message.channel.send({embed})
@@ -181,7 +181,7 @@ if(command === "vote") {
   const election_titre = args[0];
 
   if(!election_texte)
-    return message.reply("Erreur, veullez mettre un titre, du texte et spécifiez le nom du channel");
+    return message.reply("Erreur, veullez mettre un titre et du texte");
 
 
     const embed = new Discord.RichEmbed()
