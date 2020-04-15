@@ -192,11 +192,11 @@ member.send(lol46)
 if(command === "election") {
 
    const texte_election = args.join(" ");
-    message.reply(` a démarrer une éléction : ${texte_election}`);
+    message.channel.send(`${message.author.username} a démarrer une éléction : ${texte_election} \n __Appuyer sur 👌 pour voter pour lui__`);
     message.react('👌');
 
   const filter = (reaction, user) => {
-    return reaction.emoji.name === '👌' && user.id === !message.author.id;
+    return reaction.emoji.name === '👌' 
   };
   
   const collector = message.createReactionCollector(filter);
