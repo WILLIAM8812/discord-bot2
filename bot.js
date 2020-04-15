@@ -68,7 +68,7 @@ client.on("message", async message => {
 
   if(command === "help") {
     // Help for the bots
-    const command = this.client.commands
+    const command = client.commands
     .map((cmd) => `**${cmd.help.name}** \n${cmd.help.category} \n${cmd.help.description} \n${cmd.help.usage}`)
     .join("\n");
 
