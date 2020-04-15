@@ -194,6 +194,7 @@ if(command === "election") {
   message.delete().catch(O_o=>{}); 
 
   const election_texte = args.join(" ");
+  const election_time = arg.slice(1).join(' ');
 
     const embed = new Discord.RichEmbed()
     .setTitle("Election")
@@ -204,15 +205,21 @@ if(command === "election") {
     .setTimestamp()
     message.channel.send({embed})
     .then(function (message){
-      message.react("✔")
-      const filter = (reaction, user) => {
-        return reaction.emoji.name === '✔' 
+      message.react("✅")
+      const filter = (reaction) => {
+        return reaction.emoji.name === '✅' && reaction.emoji.name === '❌'
       };
       
       const collector = message.createReactionCollector(filter);
       
       collector.on('collect', (reaction, reactionCollector) => {
-        console.log(`Collected ${reaction.emoji.name}`);
+        if(reaction.emoji.name === '❌') {
+          collector.stop()
+          message.reply(` l'éléction s'est arrété a ${collected.size-1}`);
+        }else{
+          console.log(`Collected ${reaction.emoji.name}`);
+        }
+
       });
       
       collector.on('end', collected => {
@@ -223,11 +230,7 @@ if(command === "election") {
 
 }
 
-if(command === "stop_election") {
 
-  collector.stop(filter)
-
-}
 
 
 });
