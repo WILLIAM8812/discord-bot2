@@ -3,6 +3,7 @@ const Discord = require('discord.js');
 const prefixlol = "+"
 var election_encours = "0";
 var election_vote = "0";
+console.log(`election_encours = ${election_encours}`);
 
 // This is your client. Some people call it `bot`, some people call it `self`, 
 // some might call it `cootchie`. Either way, when you see `client.something`, or `bot.something`,
@@ -185,10 +186,11 @@ if(command === "vote") {
   if(!election_texte)
     return message.reply("Merci d'écrire un message valide");
 
-  if(election_encours === "1")
+  if(election_encours == "1")
     return message.reply("Désoler mais un vote est deja en cours");
 
   var election_encours = "1";
+  console.log(`election_encours = ${election_encours}`);
   console.log("vote started");
 
     const embed = new Discord.RichEmbed()
@@ -234,6 +236,7 @@ if(command === "vote") {
 
         var election_vote = "0";
         const election_encours = "0";
+        console.log(`election_encours = ${election_encours}`);
       });
        
     
