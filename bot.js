@@ -206,7 +206,7 @@ if(command === "election") {
     .then(function (message){
       message.react("✅")
       const filter = (reaction) => {
-        return reaction.emoji.name === '✅'
+        return reaction.emoji.name === '✅' || reaction.emoji.name === '❌'
       };
       
       const collector = message.createReactionCollector(filter);
