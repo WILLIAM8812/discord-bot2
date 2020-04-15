@@ -190,14 +190,23 @@ member.send(lol46)
 }
 
 if(command === "election") {
+  const election_texte = args.join(" ");
 
+    const embed = new Discord.RichEmbed()
+    .setTitle("Publicité")
+    .setAuthor(message.author.username, message.author.avatarURL)
+    .setColor("#FFD800")
+    .setDescription(election_texte)
+    .setFooter(client.user.username, client.user.avatarURL)
+    .setTimestamp()
+    message.channel.send({embed});
 
-   const texte_election = args.join(" ");
-    message.reply(` a démarrer une éléction pour lui : ${texte_election} \n __Appuyer sur 👌 pour voter pour lui__`);
-    last_message_id.react('👌');
+      message.react("✔")
+      message.react("✘")
+
 
   const filter = (reaction, user) => {
-    return reaction.emoji.name === '👌' 
+    return reaction.emoji.name === '✔' 
   };
   
   const collector = message.createReactionCollector(filter);
