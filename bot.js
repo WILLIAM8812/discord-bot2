@@ -176,8 +176,7 @@ if(command === "vote") {
 
   message.delete().catch(O_o=>{}); 
 
-  const election_texte = args.slice(2).join(' ');
-  const election_channel = args[1];
+  const election_texte = args.slice(1).join(' ');
   const election_titre = args[0];
 
   if(!election_texte)
@@ -185,7 +184,7 @@ if(command === "vote") {
 
 
     const embed = new Discord.RichEmbed()
-    .setTitle(Vote)
+    .setTitle(election_titre)
     .setAuthor(message.author.username, message.author.avatarURL)
     .setColor("#FFD800")
     .setDescription(election_texte)
