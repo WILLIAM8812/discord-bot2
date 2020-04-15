@@ -191,11 +191,10 @@ member.send(lol46)
 
 if(command === "election") {
 
-message.delete().catch(O_o=>{}); 
 
    const texte_election = args.join(" ");
-    message.reply(`${message.author.username} a démarrer une éléction : ${texte_election} \n __Appuyer sur 👌 pour voter pour lui__`);
-      message.react('👌');
+    message.reply(` a démarrer une éléction pour lui : ${texte_election} \n __Appuyer sur 👌 pour voter pour lui__`);
+    last_message_id.react('👌');
 
   const filter = (reaction, user) => {
     return reaction.emoji.name === '👌' 
