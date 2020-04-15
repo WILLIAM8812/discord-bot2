@@ -194,7 +194,6 @@ if(command === "election") {
   message.delete().catch(O_o=>{}); 
 
   const election_texte = args.join(" ");
-  const election_time = arg.slice(1).join(' ');
 
     const embed = new Discord.RichEmbed()
     .setTitle("Election")
