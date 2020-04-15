@@ -57,42 +57,19 @@ client.on("message", async message => {
     const bsod = client.emojis.find(emoji => emoji.name === "bsod");
     const m = await message.channel.send("Ping?");
     m.edit(`Pong! La latence est de ${m.createdTimestamp - message.createdTimestamp}ms. La latence du bot est de  ${Math.round(client.ping)}ms ${bsod}`);
-
-    exports.help = {
-      name: "ping",
-      category: "Général",
-      description: "Cette commande vous permet d'afficher la latence.",
-      usage: "ping"
-    };
   }
 
   if(command === "help") {
     // Help for the bots
-    const command = client.commands
-    .map((cmd) => `**${cmd.help.name}** \n${cmd.help.category} \n${cmd.help.description} \n${cmd.help.usage}`)
-    .join("\n");
-
-console.log(command);
-
-exports.help = {
-  name: "help",
-  category: "Général",
-  description: "Cette commande vous permet d'afficher l'aide.'",
-  usage: "help"
-};
+    const gmod = client.emojis.find(emoji => emoji.name === "gmod");
+    return message.reply(` __**GUIDE D'AIDE**__ ${gmod} \n \n __**help**__ : Affiche la liste d'aide \n \n __**ping**__ : Affiche le delais en ms \n \n __**say**__ : Fait dire un message specifique au bot \n \n __**purge**__ : Permet de supprimer les messages (jusqu'a 100) \n \n __**code**__ : Permet de consultée le code open source du bot ! \n \n __**ano**__ : Permet d'envoyer un message anonyme a quelqu'un \n __(+ano [Titre sans espace] [Texte])__ \n \n __**advert**__ : Permet d'envoyer une publicité \n __(+advert [Texte])__ \n \n **__vote__** : Permet de créer un vote \n __(+vote [Titre sans espace] [Texte]) \n \n **Le préfixe est actuellemnt** ${prefixlol}`);
     
   }
 
   if(command === "code") {
-  message.reply("Voila le github : __https://github.com/WILLIAM8812/discord-bot2/blob/master/bot.js__");
-  
-  exports.help = {
-    name: "code",
-    category: "Général",
-    description: "Cette commande vous permet d'afficher le code open-source du bot",
-    usage: "code"
-  };
-      
+    // Show inside the body
+    return message.reply("Voila le github : __https://github.com/WILLIAM8812/discord-bot2/blob/master/bot.js__");
+    
   }
   
   if(command === "say") {
@@ -103,13 +80,6 @@ exports.help = {
     message.delete().catch(O_o=>{}); 
     // And we get the bot to say the thing: 
     message.channel.send(sayMessage);
-
-    exports.help = {
-      name: "vote",
-      category: "Général",
-      description: "Cette commande vous permet de faire dire qq. au bot.",
-      usage: "say <texte>"
-    };
   }
   
 
@@ -132,13 +102,6 @@ exports.help = {
     const fetched = await message.channel.fetchMessages({limit: deleteCount});
     message.channel.bulkDelete(fetched)
       .catch(error => message.reply(`Impossible de supprimer les messages car : ${error}`));
-
-      exports.help = {
-        name: "purge",
-        category: "Général",
-        description: "Cette commande vous permet de supprimer un nombre de message.",
-        usage: "purge <nombre entre 2 et 100>"
-      };
   }
 
  if(command === "ano") {
@@ -176,13 +139,6 @@ exports.help = {
    */
  
   message.channel.send({embed});
-
-  exports.help = {
-    name: "ano",
-    category: "Général",
-    description: "Cette commande vous permet de faire un message anonyme.",
-    usage: "ano <Question sans espace> <Texte>"
-  };
 }
 
 if(command === "advert") {
@@ -216,13 +172,6 @@ if(command === "advert") {
    */
  
   message.channel.send({embed});
-
-  exports.help = {
-    name: "advert",
-    category: "Général",
-    description: "Cette commande vous permet de faire une publicité.",
-    usage: "advert <Texte>"
-  };
 }
 
 
@@ -286,12 +235,7 @@ if(command === "vote") {
       });
     
     ;
-    exports.help = {
-      name: "vote",
-      category: "Général",
-      description: "Cette commande vous permet de faire un sondage auprès de vos membres.",
-      usage: "vote <Question sans espace> <Texte> , répondez ❌ pour le fermer"
-    };
+      
 }
 
 
