@@ -215,7 +215,6 @@ if(command === "election") {
         if(reaction.emoji.name === '❌') {
           console.log(`Collected ${reaction.emoji.name}`);
           collector.stop()
-          message.channel.send(` l'éléction s'est arrété a ${collected.size-1}`);
         }else{
           console.log(`Collected ${reaction.emoji.name}`);
         }
@@ -224,6 +223,7 @@ if(command === "election") {
       
       collector.on('end', collected => {
         console.log(`Collected ${collected.size} items`);
+        message.channel.send(` l'éléction s'est arrété a ${collected.size-1}`);
       });
     }).catch(function() {
     });
