@@ -1,8 +1,8 @@
 // Load up the discord.js library
 const Discord = require('discord.js');
 const prefixlol = "+"
-const election_encours = "0"
-var election_vote = "0"
+var election_encours = "0";
+var election_vote = "0";
 
 // This is your client. Some people call it `bot`, some people call it `self`, 
 // some might call it `cootchie`. Either way, when you see `client.something`, or `bot.something`,
@@ -186,7 +186,9 @@ if(command === "vote") {
     return message.reply("Merci d'écrire un message valide");
 
   if(election_encours === "1")
-    return message.reply("Désoler mais un vote est deja en cours")
+    return message.reply("Désoler mais un vote est deja en cours");
+
+  var election_encours = "1";
 
     const embed = new Discord.RichEmbed()
     .setTitle(election_titre)
@@ -218,17 +220,17 @@ if(command === "vote") {
       
       collector.on('end', collected => {
         console.log(`Collected ${collected.size} items, stop`);
-        var election_encours = "0"
-        var election_vote = "0"
 
         const embed = new Discord.RichEmbed()
-        .setTitle(`Le vote précédent c'est arréter avec **__${collected.size} vote(s) positifs__**`)
+        .setTitle(`Le vote précédent c'est arréter avec **__${election_vote} vote(s) positifs__**`)
         .setAuthor("Vote términée", "https://previews.123rf.com/images/r7cky/r7cky1610/r7cky161000014/66668278-liste-de-v%C3%A9rification-du-vote-logo.jpg")
         .setColor("#43FF51 ")
         .setFooter(client.user.username, client.user.avatarURL)
         .setTimestamp()
         message.channel.send({embed})
 
+        var election_vote = "0";
+        var election_encours = "0";
       });
     }).catch(function() {
     });
