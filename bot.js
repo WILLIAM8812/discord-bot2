@@ -21,9 +21,9 @@ client.on("ready", () => {
   // Example of changing the bot's playing game to something useful. `client.user` is what the
   // docs refer to as the "ClientUser".
   bot.user.setPresence({ status: 'online', game: { name: 'En mise a jour' } });
-  .then(console.log)
-  .catch(console.error);
 });
+
+
 
 
 client.on("guildCreate", guild => {
