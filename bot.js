@@ -2,7 +2,7 @@
 const Discord = require('discord.js');
 const prefixlol = "+"
 const election_encours = "0"
-const election_vote = "0"
+var election_vote = "0"
 
 // This is your client. Some people call it `bot`, some people call it `self`, 
 // some might call it `cootchie`. Either way, when you see `client.something`, or `bot.something`,
@@ -218,8 +218,8 @@ if(command === "vote") {
       
       collector.on('end', collected => {
         console.log(`Collected ${collected.size} items, stop`);
-        election_encours = "0"
-        election_vote = "0"
+        var election_encours = "0"
+        var election_vote = "0"
 
         const embed = new Discord.RichEmbed()
         .setTitle(`Le vote précédent c'est arréter avec **__${collected.size} vote(s) positifs__**`)
