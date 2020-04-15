@@ -1,9 +1,10 @@
 // Load up the discord.js library
 const Discord = require('discord.js');
 const prefixlol = "+"
-var election_encours = "0";
+const election_encours = "encours";
 var election_vote = "0";
-console.log(`election_encours = ${election_encours}`);
+
+
 
 // This is your client. Some people call it `bot`, some people call it `self`, 
 // some might call it `cootchie`. Either way, when you see `client.something`, or `bot.something`,
@@ -63,7 +64,7 @@ client.on("message", async message => {
   if(command === "help") {
     // Help for the bots
     const gmod = client.emojis.find(emoji => emoji.name === "gmod");
-    return message.reply(` __**GUIDE D'AIDE**__ ${gmod} \n \n __**help**__ : Affiche la liste d'aide \n \n __**ping**__ : Affiche le delais en ms \n \n __**say**__ : Fait dire un message specifique au bot \n \n __**purge**__ : Permet de supprimer les messages (jusqu'a 100) \n \n __**code**__ : Permet de consultée le code open source du bot ! \n \n __**ano**__ : Permet d'envoyer un message anonyme a quelqu'un \n __(+ano [Titre sans espace] [Texte])__ \n \n __**advert**__ : Permet d'envoyer une publicité \n __(+advert [Texte])__ \n \n **__vote__** : Permet de créer un vote, réagisser avec ❌pour le fermer. \n __(+vote [Titre sans espace] [Texte])__ \n \n **Le préfixe est actuellemnt** ${prefixlol}`);
+    return message.reply(` __**GUIDE D'AIDE**__ ${gmod} \n \n __**help**__ : Affiche la liste d'aide \n \n __**ping**__ : Affiche le delais en ms \n \n __**say**__ : Fait dire un message specifique au bot \n \n __**purge**__ : Permet de supprimer les messages (jusqu'a 100) \n \n __**code**__ : Permet de consultée le code open source du bot ! \n \n __**ano**__ : Permet d'envoyer un message anonyme a quelqu'un \n __(+ano [Titre sans espace] [Texte])__ \n \n __**advert**__ : Permet d'envoyer une publicité \n __(+advert [Texte])__ \n \n **__vote__** : Permet de créer un vote \n __(+vote [Titre sans espace] [Texte])__ \n \n **Le préfixe est actuellemnt** ${prefixlol}`);
     
   }
 
@@ -183,11 +184,8 @@ if(command === "vote") {
   const election_texte = args.slice(1).join(' ');
   const election_titre = args[0];
 
-  if(!election_texte)
-    return message.reply("Merci d'écrire un message valide");
-
-  if(election_encours == "1")
-    return message.reply("Désoler mais un vote est deja en cours");
+  if(!election_texte || election_encours === "encours")
+    return message.reply("Erreur");
 
   var election_encours = "1";
   console.log(`election_encours = ${election_encours}`);
@@ -198,51 +196,10 @@ if(command === "vote") {
     .setAuthor(message.author.username, message.author.avatarURL)
     .setColor("#FFD800")
     .setDescription(election_texte)
-    .setFooter(client.user.username, client.user.avatarURL)
-    .addField("Répondre avec ✅")
+    .setFooter("Répondre avec ✅ ou ❌", client.user.avatarURL)
+    .addField()
     .setTimestamp()
     message.channel.send({embed})
-    .then(function (message) {
-
-      message.react("✅")
-      const filter = (reaction) => {
-        return reaction.emoji.name === '✅' || reaction.emoji.name === '❌'
-      };
-      
-      const collector = message.createReactionCollector(filter);
-      
-      collector.on('collect', (reaction, reactionCollector) => {
-        if(reaction.emoji.name === '❌') {
-          console.log(`Collected ${reaction.emoji.name}`);
-          collector.stop()
-        }else{
-          console.log(`Collected ${reaction.emoji.name}`);
-          election_vote++;
-          console.log(`Nbr d'emoji = ${election_vote}`);
-        }
-
-      });
-      
-      collector.on('end', collected => {
-        console.log(`Collected ${collected.size} items, stop`);
-
-        const embed = new Discord.RichEmbed()
-        .setTitle(`Le vote précédent c'est arréter avec **__${election_vote} vote(s) positifs__**`)
-        .setAuthor("Vote términée", "https://previews.123rf.com/images/r7cky/r7cky1610/r7cky161000014/66668278-liste-de-v%C3%A9rification-du-vote-logo.jpg")
-        .setColor("#43FF51 ")
-        .setFooter(client.user.username, client.user.avatarURL)
-        .setTimestamp()
-        message.channel.send({embed})
-
-        var election_vote = "0";
-        const election_encours = "0";
-        console.log(`election_encours = ${election_encours}`);
-      });
-       
-    
-    }).catch(function() {
-
-    });
 }
 
 
