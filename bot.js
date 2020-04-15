@@ -62,7 +62,7 @@ client.on("message", async message => {
   if(command === "help") {
     // Help for the bots
     const gmod = client.emojis.find(emoji => emoji.name === "gmod");
-    return message.reply(` __**GUIDE D'AIDE**__ ${gmod} \n \n __**help**__ : Affiche la liste d'aide \n \n __**ping**__ : Affiche le delais en ms \n \n __**say**__ : Fait dire un message specifique au bot \n \n __**purge**__ : Permet de supprimer les messages (jusqu'a 100) \n \n __**code**__ : Permet de consultée le code open source du bot ! \n \n __**ano**__ : Permet d'envoyer un message anonyme a quelqu'un \n __(+ano [Titre sans espace] [Texte])__ \n \n __**advert**__ : Permet d'envoyer une publicité \n __(+advert [Texte])__ \n \n **__vote__** : Permet de créer un vote \n __(+vote [Titre sans espace] [Texte]) \n \n **Le préfixe est actuellemnt** ${prefixlol}`);
+    return message.reply(` __**GUIDE D'AIDE**__ ${gmod} \n \n __**help**__ : Affiche la liste d'aide \n \n __**ping**__ : Affiche le delais en ms \n \n __**say**__ : Fait dire un message specifique au bot \n \n __**purge**__ : Permet de supprimer les messages (jusqu'a 100) \n \n __**code**__ : Permet de consultée le code open source du bot ! \n \n __**ano**__ : Permet d'envoyer un message anonyme a quelqu'un \n __(+ano [Titre sans espace] [Texte])__ \n \n __**advert**__ : Permet d'envoyer une publicité \n __(+advert [Texte])__ \n \n **__vote__** : Permet de créer un vote, réagisser avec ❌pour le fermer. \n __(+vote [Titre sans espace] [Texte])__ \n \n **Le préfixe est actuellemnt** ${prefixlol}`);
     
   }
 
