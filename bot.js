@@ -201,9 +201,13 @@ if(command === "vote") {
     .setColor("#FFD800")
     .setDescription(election_texte)
     .setFooter("Répondre avec ✅ ou ❌", client.user.avatarURL)
-    .addField()
     .setTimestamp()
     message.channel.send({embed})
+      .then(function(message) {
+        message.react("✅")
+        message.react("❌")
+      }).catch(function() {
+      });
 }
 
 
