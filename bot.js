@@ -1,28 +1,15 @@
-// Load up the discord.js library
+
 const Discord = require('discord.js');
 const prefixlol = "+"
 
-
-
-// This is your client. Some people call it `bot`, some people call it `self`, 
-// some might call it `cootchie`. Either way, when you see `client.something`, or `bot.something`,
-// this is what we're refering to. Your client.
 const client = new Discord.Client();
-
-// Here we load the config.json file that contains our token and our prefix values. 
-// config.token contains the bot's token
-// config.prefix contains the message prefix.
 
 client.on("ready", () => {
   // This event will run if the bot starts, and logs in, successfully.
   console.log(`Bot has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds.`); 
-  // Example of changing the bot's playing game to something useful. `client.user` is what the
-  // docs refer to as the "ClientUser".
-  client.user.setPresence({ game: { name: process.env.BOT_STATUE}});
+
+  client.user.setPresence({ game: { name: "+help"}});
 });
-
-
-
 
 client.on("guildCreate", guild => {
   // This event triggers when the bot joins a guild.
@@ -68,7 +55,7 @@ client.on("message", async message => {
     const embed = new Discord.RichEmbed()
     .setAuthor("Liste d'aide", "https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Information.svg/2000px-Information.svg.png")
     .setColor("#FFD800")
-    .setDescription(`__**help**__ : Affiche la liste d'aide \n \n __**ping**__ : Affiche le delais en ms \n \n __**say**__ : Fait dire un message specifique au bot \n \n __**purge**__ : Permet de supprimer les messages (jusqu'a 100) \n \n __**code**__ : Permet de consultée le code open source du bot ! \n \n __**ano**__ : Permet d'envoyer un message anonyme a quelqu'un \n __(+ano [Titre sans espace] [Texte])__ \n \n __**advert**__ : Permet d'envoyer une publicité \n __(+advert [Texte])__ \n \n **__vote__** : Permet de créer un vote \n __(+vote [Titre sans espace] [Texte])__ \n \n **Le préfixe est actuellemnt** ${prefixlol}`)
+    .setDescription(`__**help**__ : Affiche la liste d'aide \n \n __**ping**__ : Affiche le delais en ms \n \n __**say**__ : Fait dire un message specifique au bot \n \n __**purge**__ : Permet de supprimer les messages (jusqu'a 100) \n \n __**code**__ : Permet de consultée le code open source du bot ! \n \n __**ano**__ : Permet d'envoyer un message anonyme a quelqu'un \n __(+ano [Titre sans espace] [Texte])__ \n \n __**advert**__ : Permet d'envoyer une publicité \n __(+advert [Texte])__ \n \n **__vote__** : Permet de créer un vote \n __(+vote [Titre sans espace] [Nom du channel] [Texte])__ \n \n **Le préfixe est actuellemnt** ${prefixlol}`)
     .setTimestamp()
     .setFooter(client.user.username, client.user.avatarURL)
     message.channel.send({embed})
@@ -189,11 +176,12 @@ if(command === "vote") {
 
   message.delete().catch(O_o=>{}); 
 
-  const election_texte = args.slice(1).join(' ');
+  const election_texte = args.slice(2).join(' ');
+  const election_channel = args[1];
   const election_titre = args[0];
 
   if(!election_texte)
-    return message.reply("Erreur, veullez mettre un titre et du texte");
+    return message.reply("Erreur, veullez mettre un titre, du texte et spécifiez le nom du channel");
 
 
     const embed = new Discord.RichEmbed()
@@ -203,7 +191,7 @@ if(command === "vote") {
     .setDescription(election_texte)
     .setFooter("Répondre avec ✅ ou ❌", client.user.avatarURL)
     .setTimestamp()
-    message.channel.send({embed})
+    message.guild.channels.find("id", election_channel).send({embed});
       .then(function(message) {
         message.react("✅")
         message.react("❌")
