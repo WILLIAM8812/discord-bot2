@@ -189,6 +189,36 @@ member.send(lol46)
   
 }
 
+if(command === "election") {
+  // Let's first check if we have a member and if we can kick them!
+  // message.mentions.members is a collection of people that have been mentioned, as GuildMembers.
+  // We can also support getting the member by ID, which would be args[0]
+
+  const filter = (reaction, user) => {
+    return reaction.emoji.name === '👌'
+  };
+  
+  const collector = message.createReactionCollector(filter);
+  
+  collector.on('collect', (reaction, reactionCollector) => {
+    console.log(`Collected ${reaction.emoji.name}`);
+  });
+  
+  collector.on('end', collected => {
+    console.log(`Collected ${collected.size} items`);
+  });
+    
+
+
+
+}
+
+if(command === "stop_election") {
+
+  collector.stop()
+
+}
+
 
 });
 client.login(process.env.BOT_TOKEN);
