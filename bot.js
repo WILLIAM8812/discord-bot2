@@ -20,7 +20,7 @@ client.on("ready", () => {
   console.log(`Bot has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds.`); 
   // Example of changing the bot's playing game to something useful. `client.user` is what the
   // docs refer to as the "ClientUser".
-  bot.user.setPresence({ status: 'online', game: { name: 'En mise a jour' } });
+  client.user.setPresence({ status: 'online', game: { name: 'En mise a jour' } });
 });
 
 
