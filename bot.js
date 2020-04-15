@@ -66,10 +66,9 @@ client.on("message", async message => {
   if(command === "help") {
     // Help for the bots
     const embed = new Discord.RichEmbed()
-    .setTitle(Aide)
     .setAuthor("Liste d'aide", "https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Information.svg/2000px-Information.svg.png")
     .setColor("#FFD800")
-    .setDescription(` __**GUIDE D'AIDE**__ ${gmod} \n \n __**help**__ : Affiche la liste d'aide \n \n __**ping**__ : Affiche le delais en ms \n \n __**say**__ : Fait dire un message specifique au bot \n \n __**purge**__ : Permet de supprimer les messages (jusqu'a 100) \n \n __**code**__ : Permet de consultée le code open source du bot ! \n \n __**ano**__ : Permet d'envoyer un message anonyme a quelqu'un \n __(+ano [Titre sans espace] [Texte])__ \n \n __**advert**__ : Permet d'envoyer une publicité \n __(+advert [Texte])__ \n \n **__vote__** : Permet de créer un vote \n __(+vote [Titre sans espace] [Texte])__ \n \n **Le préfixe est actuellemnt** ${prefixlol}`)
+    .setDescription(`__**help**__ : Affiche la liste d'aide \n \n __**ping**__ : Affiche le delais en ms \n \n __**say**__ : Fait dire un message specifique au bot \n \n __**purge**__ : Permet de supprimer les messages (jusqu'a 100) \n \n __**code**__ : Permet de consultée le code open source du bot ! \n \n __**ano**__ : Permet d'envoyer un message anonyme a quelqu'un \n __(+ano [Titre sans espace] [Texte])__ \n \n __**advert**__ : Permet d'envoyer une publicité \n __(+advert [Texte])__ \n \n **__vote__** : Permet de créer un vote \n __(+vote [Titre sans espace] [Texte])__ \n \n **Le préfixe est actuellemnt** ${prefixlol}`)
     .setTimestamp()
     message.channel.send({embed})
     
