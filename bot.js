@@ -8,7 +8,9 @@ client.on("ready", () => {
   // This event will run if the bot starts, and logs in, successfully.
   console.log(`Bot has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds.`); 
 
-  client.user.setPresence({ game: { name: "+help"}});
+  client.user.setActivity('discord.js', { type: 'WATCHING' })
+  .then(presence => console.log(`Activity set to ${presence.activities[0].name}`))
+  .catch(console.error);
 });
 
 client.on("guildCreate", guild => {
