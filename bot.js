@@ -100,7 +100,7 @@ client.on("ready", () => {
   .then(console.log)
   .catch(console.error);
   
-  				console.log(`Logged in as ${client.user.tag}!`);
+  								console.log(`Logged in as ${client.user.tag}!`);
 				if (!client.channels.has(config.discord_channel_id)) {
 					throw new Error(
 						`Channel with ID ${
@@ -114,6 +114,9 @@ client.on("ready", () => {
 					`Start to stream gameserver console (GSID: #${
 						invoice.gsid
 					}) on channel "${channel.name}"`,
+				);
+
+				streamConsole(invoice, channel);
 });
 
 client.on("guildCreate", guild => {
