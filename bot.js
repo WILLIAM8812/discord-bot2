@@ -209,7 +209,7 @@ if(command === "vote") {
 
 if(command === "info") {
 
-     db.default).find().toArray(function (error, results) {
+     db.default.find().toArray(function (error, results) {
         if (error) throw error;
 
         results.forEach(function(i, obj) {
