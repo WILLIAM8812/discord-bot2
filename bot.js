@@ -209,17 +209,20 @@ if(command === "vote") {
 
 if(command === "info") {
 
-     db.collection("default").find().toArray(function (error, results) {
-        if (error) throw error;
 
-        results.forEach(function(i, obj) {
-            message.reply(`
-                ID :   + £{obj._id.toString()}\n
-                Nom : ${obj.name} \n       
-                Jeu : ${obj.game}              
-				`);
-        });
-    });
+     return new Promise((resolve, reject) => {
+         let lists = db.collection('shoppingLists');
+         lists.find({}).toArray((err, documents) => {
+             if (err) {
+                 logger.error('Erreur survenue: ' + err.message, 'fetchAll()');
+                 reject(err);
+             } else {
+                 logger.debug('Raw data: ' + JSON.stringify(documents), 'fetchAll()');
+                 resolve({ data: JSON.stringify(documents), statusCode: (documents.length > 0) ? 200 : 404 });
+             }
+         });
+     });
+ 
 
 }
 
