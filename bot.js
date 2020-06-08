@@ -213,11 +213,11 @@ if(command === "info") {
         if (error) throw error;
 
         results.forEach(function(i, obj) {
-            message.reply(
-                "ID : "  + obj._id.toString() + "\n" // 53dfe7bbfd06f94c156ee96e
-                "Nom : " + obj.name + "\n"           // Adrian Shephard
-                "Jeu : " + obj.game                  // Half-Life: Opposing Force
-            );
+            message.reply(`
+                ID :   + £{obj._id.toString()}\n
+                Nom : ${obj.name} \n       
+                Jeu : ${obj.game}              
+				`);
         });
     });
 
