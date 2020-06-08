@@ -208,16 +208,16 @@ if(command === "vote") {
 }
 
 if(command === "info") {
-	
-    db.collection("default").find().toArray(function (error, results) {
+
+     db.collection("default").find().toArray(function (error, results) {
         if (error) throw error;
 
         results.forEach(function(i, obj) {
             message.reply(`
-		ID : ${obj._id.toString()} \n
-                ${Nom : obj.name} \n
-					${Jeu : obj.game} 
-            `);
+                ID  : ${obj._id.toString()}\n
+                Nom : ${obj.name} \n       
+                Jeu : ${obj.game}              
+				`);
         });
     });
 
@@ -228,32 +228,11 @@ if(command === "set") {
 
   const db_texte = args.slice(1).join(' ');
   const db_nom = args[0];
-  
-  create()
 
-function create() {
-     return new Promise((resolve, reject) => {
-         let lists = "db.collection('default')";
-         let listId = mongodb.ObjectId();
-         let whenCreated = Date.now();
-         let item = {
-             _id: listId,
-             id: listId,
-             name: db_nom,
-			 text: db_texte,
-             whenCreated: whenCreated,
-             whenUpdated: null
-         };
-         lists.insertOne(item, (err, result) => {
-             if (err) {
-                 message.reply('Error occurred: ' + err.message, 'create()');
-                 reject(err);
-             } else {
-                 resolve({ data: { createdId: result.insertedId }, statusCode: 201 });
-             }
-         });
-     });
- }
+  if(!db_texte)
+    return message.reply("Erreur, veullez mettre un titre et du texte");
+
+     db.collection("default").save(objNew, { name: db_name }, { text: db_texte }); // Ce document sera inséré
 	  
 }
 
