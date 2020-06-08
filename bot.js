@@ -209,16 +209,15 @@ if(command === "vote") {
 
 if(command === "info") {
 	
-
      function fetchAll() {
      return new Promise((resolve, reject) => {
          let lists = db.collection('shoppingLists');
          lists.find({}).toArray((err, documents) => {
              if (err) {
-                 logger.error('Erreur survenue: ' + err.message, 'fetchAll()');
+                 message.reply('Erreur survenue: ' + err.message, 'fetchAll()');
                  reject(err);
              } else {
-                 logger.debug('Raw data: ' + JSON.stringify(documents), 'fetchAll()');
+                 message.reply('Raw data: ' + JSON.stringify(documents), 'fetchAll()');
                  resolve({ data: JSON.stringify(documents), statusCode: (documents.length > 0) ? 200 : 404 });
              }
          });
