@@ -4,8 +4,8 @@ const prefixlol = "+"
 
 const MongoClient = require('mongodb').MongoClient;
 const uri = `mongodb+srv://William:(process.env.PASSWORD)@cluster0-0jorp.mongodb.net/Cluster0?retryWrites=true&w=majority`;
-const client = new MongoClient(uri, { useNewUrlParser: true });
-client.connect;
+const db = new MongoClient(uri, { useNewUrlParser: true });
+db.connect;
 
 
 
