@@ -5,11 +5,8 @@ const prefixlol = "+"
 const MongoClient = require('mongodb').MongoClient;
 const uri = `mongodb+srv://William:${PASSWORD}@cluster0-0jorp.mongodb.net/Cluster0?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true });
-client.connect(err => {
-  const collection = client.db("test").collection("devices");
-  // perform actions on the collection object
-  client.close();
-});
+client.connect;
+
 
 
 const client = new Discord.Client();
