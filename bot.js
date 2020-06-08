@@ -209,7 +209,7 @@ if(command === "vote") {
 
 if(command === "info") {
 
-     db.collection("default").find().toArray(function (error, results) {
+     db.default).find().toArray(function (error, results) {
         if (error) throw error;
 
         results.forEach(function(i, obj) {
@@ -232,7 +232,7 @@ if(command === "set") {
   if(!db_texte)
     return message.reply("Erreur, veullez mettre un titre et du texte");
 
-     db.collection("default").save(objNew, { name: db_name }, { text: db_texte }); // Ce document sera inséré
+     db.default.save(objNew, { name: db_name }, { text: db_texte }); // Ce document sera inséré
 	  
 }
 
