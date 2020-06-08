@@ -251,7 +251,7 @@ function create() {
          };
          lists.insertOne(item, (err, result) => {
              if (err) {
-                 logger.error('Error occurred: ' + err.message, 'create()');
+                 message.reply('Error occurred: ' + err.message, 'create()');
                  reject(err);
              } else {
                  resolve({ data: { createdId: result.insertedId }, statusCode: 201 });
