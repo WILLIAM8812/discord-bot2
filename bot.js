@@ -232,7 +232,7 @@ if(command === "set") {
   if(!db_texte)
     return message.reply("Erreur, veullez mettre un titre et du texte");
 
-     save(objNew, { name: ${db_name} }, { text: ${db_texte}); // Ce document sera inséré
+     save(objNew, { name: db_name }, { text: db_texte ); // Ce document sera inséré
 	  
 }
 
