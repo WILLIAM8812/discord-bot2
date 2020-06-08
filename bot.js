@@ -213,7 +213,7 @@ if(command === "info") {
 	
      function fetchAll() {
      return new Promise((resolve, reject) => {
-         let lists = db.collection('default');
+         let lists = "db.collection('default')";
          lists.find({}).toArray((err, documents) => {
              if (err) {
                  message.reply('Erreur survenue: ' + err.message, 'fetchAll()');
@@ -238,7 +238,7 @@ if(command === "set") {
 
 function create() {
      return new Promise((resolve, reject) => {
-         let lists = db.collection('default');
+         let lists = "db.collection('default')";
          let listId = mongodb.ObjectId();
          let whenCreated = Date.now();
          let item = {
