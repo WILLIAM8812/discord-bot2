@@ -208,8 +208,9 @@ if(command === "vote") {
 }
 
 if(command === "info") {
+	
 
-
+     function fetchAll() {
      return new Promise((resolve, reject) => {
          let lists = db.collection('shoppingLists');
          lists.find({}).toArray((err, documents) => {
@@ -222,7 +223,7 @@ if(command === "info") {
              }
          });
      });
- 
+ }
 
 }
 
