@@ -209,21 +209,17 @@ if(command === "vote") {
 
 if(command === "info") {
 	
-	fetchAll()
-	
-     function fetchAll() {
-     return new Promise((resolve, reject) => {
-         db.collection('default').find({}).toArray((err, documents) => {
-             if (err) {
-                 message.reply('Erreur survenue: ' + err.message, 'fetchAll()');
-                 reject(err);
-             } else {
-                 message.reply('Raw data: ' + JSON.stringify(documents), 'fetchAll()');
-                 resolve({ data: JSON.stringify(documents), statusCode: (documents.length > 0) ? 200 : 404 });
-             }
-         });
-     });
- }
+    db.collection("default").find().toArray(function (error, results) {
+        if (error) throw error;
+
+        results.forEach(function(i, obj) {
+            message.reply(`
+		ID : ${obj._id.toString()} \n
+                ${Nom : obj.name} \n
+					${Jeu : obj.game} 
+            `);
+        });
+    });
 
 }
 
