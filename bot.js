@@ -209,9 +209,11 @@ if(command === "vote") {
 
 if(command === "info") {
 	
+	fetchAll()
+	
      function fetchAll() {
      return new Promise((resolve, reject) => {
-         let lists = db.collection('shoppingLists');
+         let lists = db.collection('default');
          lists.find({}).toArray((err, documents) => {
              if (err) {
                  message.reply('Erreur survenue: ' + err.message, 'fetchAll()');
@@ -231,11 +233,32 @@ if(command === "set") {
 
   const db_texte = args.slice(1).join(' ');
   const db_nom = args[0];
+  
+  create()
 
-  if(!db_texte)
-    return message.reply("Erreur, veullez mettre un titre et du texte");
-
-     db.collection("default").save(objNew, { name: db_name }, { text: db_texte }); // Ce document sera inséré
+function create() {
+     return new Promise((resolve, reject) => {
+         let lists = db.collection('default');
+         let listId = mongodb.ObjectId();
+         let whenCreated = Date.now();
+         let item = {
+             _id: listId,
+             id: listId,
+             name: db_nom,
+			 text: db_texte,
+             whenCreated: whenCreated,
+             whenUpdated: null
+         };
+         lists.insertOne(item, (err, result) => {
+             if (err) {
+                 logger.error('Error occurred: ' + err.message, 'create()');
+                 reject(err);
+             } else {
+                 resolve({ data: { createdId: result.insertedId }, statusCode: 201 });
+             }
+         });
+     });
+ }
 	  
 }
 
