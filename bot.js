@@ -213,8 +213,7 @@ if(command === "info") {
 	
      function fetchAll() {
      return new Promise((resolve, reject) => {
-         let lists = "db.collection('default')";
-         lists.find({}).toArray((err, documents) => {
+         db.collection('default').find({}).toArray((err, documents) => {
              if (err) {
                  message.reply('Erreur survenue: ' + err.message, 'fetchAll()');
                  reject(err);
