@@ -207,6 +207,35 @@ if(command === "vote") {
       });
 }
 
+if(command === "info") {
+
+     find().toArray(function (error, results) {
+        if (error) throw error;
+
+        results.forEach(function(i, obj) {
+            message.reply(
+                "ID : "  + obj._id.toString() + "\n" // 53dfe7bbfd06f94c156ee96e
+                "Nom : " + obj.name + "\n"           // Adrian Shephard
+                "Jeu : " + obj.game                  // Half-Life: Opposing Force
+            );
+        });
+    });
+
+}
+
+if(command === "set") {
+
+
+  const db_texte = args.slice(1).join(' ');
+  const db_nom = args[0];
+
+  if(!db_texte)
+    return message.reply("Erreur, veullez mettre un titre et du texte");
+
+     save(objNew, { name: ${db_name} }, { text: ${db_texte}); // Ce document sera inséré
+	  
+}
+
 
 
 
