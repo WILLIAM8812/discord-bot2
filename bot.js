@@ -29,7 +29,7 @@ client.on("message", async message => {
   
   // It's good practice to ignore other bots. This also makes your bot ignore itclient
   // and not get into a spam loop (we call that "botception").
-  if(message.author.bot) return;
+ 
   
   // Also good practice to ignore any message that does not start with our prefix, 
   // which is set in the configuration file.
