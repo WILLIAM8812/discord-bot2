@@ -367,7 +367,7 @@ if(command === "stop") {
 
 })
 process.on('unhandledRejection', error => console.error('Uncaught Promise Rejection', error));
-client.login(`NzM5ODY2NTg3Nzc1MTA3MTQy.XygsdA.3SGl7jMBZRX9h7CSdJH4dEw7L3k`);
+client.login(process.env.TOKEN);
 
 function errore(description, message) {
   const embed = new Discord.MessageEmbed()
