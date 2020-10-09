@@ -2,9 +2,10 @@
 const Discord = require('discord.js');
 const ytdl = require('ytdl-core');
 const Canvas = require('canvas');
+const config = require('config');
 
 prefixlol = "p"
-
+let token = config.token;
 
 const client = new Discord.Client();
 
@@ -367,7 +368,7 @@ if(command === "stop") {
 
 })
 process.on('unhandledRejection', error => console.error('Uncaught Promise Rejection', error));
-client.login(process.env.TOKEN);
+client.login(token);
 
 function errore(description, message) {
   const embed = new Discord.MessageEmbed()
