@@ -7,15 +7,15 @@ const config = require("./config.json")
 'use strict';
 let https = require('https');
 
-let subscriptionKey = 'enter key here';
-let host = 'api.cognitive.microsoft.com';
-let path = '/bing/v7.0/images/search';
-let term = 'tropical ocean';
-
-
-
 prefixlol = "p"
 let token = config.token;
+let key  = config.key;
+let hoste = config.host2;
+
+let subscriptionKey = key;
+let host = hoste;
+let path = '/bing/v7.0/images/search';
+
 
 const client = new Discord.Client();
 
@@ -171,33 +171,65 @@ client.on("message", async message => {
   }
 
   if(command === "image") {
-    let request_params = {
-      method : 'GET',
-      hostname : host,
-      path : path + '?q=' + encodeURIComponent(search),
-      headers : {
-      'Ocp-Apim-Subscription-Key' : subscriptionKey,
-      }
-  };
+    const terme = args.join(" ");
 
-  let req = https.request(request_params, response_handler);
-  req.end();
+    let term = terme;
 
-  let response_handler = function (response) {
+let response_handler = function (response) {
     let body = '';
-  };
-    
-  response.on('data', function (d) {
-    body += d;
-});
+    response.on('data', function (d) {
+        body += d;
+    });
+    response.on('end', function () {
+        let imageResults = JSON.parse(body);
+        if (imageResults.value.length > 0) {
+            let firstImageResult = imageResults.value[0];
 
-response.on('end', function () {
-  let firstImageResult = imageResults.value[0];
-  console.log(`Image result count: ${imageResults.value.length}`);
-  console.log(`First image thumbnail url: ${firstImageResult.thumbnailUrl}`);
-  console.log(`First image web search url: ${firstImageResult.webSearchUrl}`);
-});
+            const exampleEmbed = new Discord.MessageEmbed()
+            const embed = new Discord.MessageEmbed()
+            .setAuthor("Image Rechérché")
+            .setTitle(firstImageResult.name)
+            .setColor(firstImageResult.accentColor)
+            .setURL(firstImageResult.contentUrl)
+            .setImage(firstImageResult.thumbnailUrl)
+            .setTimestamp(firstImageResult.datePublished)
+            .setFooter(client.user.username, client.user.displayAvatarURL({ dynamic: true, format: 'png', size: 1024 }))
+            message.channel.send({embed});
 
+        }
+        else {
+            console.log("Couldn't find image results!");
+}
+
+
+
+    });
+    response.on('error', function (e) {
+        console.log('Error: ' + e.message);
+    });
+};
+
+let bing_image_search = function (search) {
+  console.log('Searching images for: ' + term);
+  let request_params = {
+        method : 'GET',
+        hostname : host,
+        path : path + '?q=' + encodeURIComponent(search),
+        headers : {
+            'Ocp-Apim-Subscription-Key' : subscriptionKey,
+        }
+    };
+
+    let req = https.request(request_params, response_handler);
+    req.end();
+}
+
+if (subscriptionKey.length === 32) {
+    bing_image_search(term);
+} else {
+    console.log('Invalid Bing Search API subscription key!');
+    console.log('Please paste yours into the source code.');
+}
 
   }
 
@@ -420,6 +452,10 @@ function errore(description, message) {
   .setFooter(client.user.username, client.user.displayAvatarURL({ dynamic: true, format: 'png', size: 1024 }))
   message.channel.send({embed});
 }
+
+let response_handler = function (response) {
+  let body = '';
+};
 
 
 
