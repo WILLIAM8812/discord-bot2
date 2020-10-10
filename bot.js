@@ -74,7 +74,7 @@ client.on('guildMemberAdd', async member => {
 
 	ctx.font = '32px sans-serif';
 	ctx.fillStyle = '#ff0000';
-	ctx.fillText('Bienvenue sur Cookies Rp !', canvas.width / 2.8, canvas.height / 3.5);
+	ctx.fillText(`Bienvenue sur ${guild.name}`, canvas.width / 2.8, canvas.height / 3.5);
 
 	ctx.font = applyText(canvas, `${member.displayName}!`);
 	ctx.fillStyle = '#ffffff';
@@ -90,7 +90,7 @@ client.on('guildMemberAdd', async member => {
 
 	const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'welcome-image.png');
 
-	channel.send(`Bienvenue sur Cookies Rp, ${member}!`, attachment);
+	channel.send(`Bienvenue sur ${guild.name}, ${member}!`, attachment);
 });
 
 client.on('guildMemberRemove', async member => {
@@ -108,7 +108,7 @@ client.on('guildMemberRemove', async member => {
 
 	ctx.font = '32px sans-serif';
 	ctx.fillStyle = '#ff0000';
-	ctx.fillText('A plus tard sur Cookies Rp !', canvas.width / 2.8, canvas.height / 3.5);
+	ctx.fillText(`A plus tard sur ${guild.name} !`, canvas.width / 2.8, canvas.height / 3.5);
 
 	ctx.font = applyText(canvas, `${member.displayName}!`);
 	ctx.fillStyle = '#ffffff';
@@ -124,7 +124,7 @@ client.on('guildMemberRemove', async member => {
 
 	const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'welcome-image.png');
 
-	channel.send(`A plus tard sur Cookies Rp, ${member}!`, attachment);
+	channel.send(`A plus tard sur ${guild.name}, ${member}!`, attachment);
 });
 
 
@@ -551,17 +551,21 @@ if(command === "stop") {
 }
 
 if(command === "joined") {
-  if (!message.author.username === "Wily") {
+  if (!message.author.id === "446010613785821196") {
     return errore("T'essaye de faire quoi la ?", message);
   } else {
     client.emit('guildMemberAdd', message.member);
   }
-
-
-
 }
 
-
+if(command === "stopnow") {
+  if (!message.author.id === "446010613785821196") {
+    return errore("T'essaye de faire quoi la ?", message);
+  } else {
+    errore("Le bot va s'arretter dans 3 sec !", message);
+    setTimeout(() => {process.exit(0);}, 3000);
+  }
+}
 
 
 
