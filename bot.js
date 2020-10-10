@@ -2,6 +2,7 @@
 const Discord = require('discord.js');
 const ytdl = require('ytdl-core');
 const Canvas = require('canvas');
+const randomWords = require('random-words');
 const config = require("./config.json")
 
 'use strict';
@@ -11,6 +12,7 @@ prefixlol = "p"
 let token = config.token;
 let key  = config.key;
 let hoste = config.host2;
+let cooldown = new Set();
 
 let subscriptionKey = key;
 let host = hoste;
@@ -21,7 +23,8 @@ const client = new Discord.Client();
 
 const activities_list = [
   `${prefixlol}help | Radio !`, 
-  `${prefixlol}help | Recorder !`,  
+  `${prefixlol}help | Image Searcher !`,  
+  `${prefixlol}help | Work with azure api !`
   ];
 
 client.on("ready", () => {
@@ -31,7 +34,7 @@ client.on("ready", () => {
   setInterval(() => {
     const index = Math.floor(Math.random() * (activities_list.length - 1) + 1); // generates a random number between 1 and the length of the activities array list (in this case 5).
     client.user.setActivity(activities_list[index]); // sets bot's activities to one of the phrases in the arraylist.
-}, 10000);
+}, 5000);
   
 })
 
@@ -72,7 +75,7 @@ client.on('guildMemberAdd', async member => {
 	ctx.closePath();
 	ctx.clip();
 
-	const avatar = await Canvas.loadImage(member.user.displayAvatarURL({ format: 'jpg' }));
+	const avatar = await Canvas.loadImage(member.user.displayAvatarURL({ format: 'jpg' , size: 2048 }));
 	ctx.drawImage(avatar, 25, 25, 200, 200);
 
 	const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'welcome-image.png');
@@ -106,7 +109,7 @@ client.on('guildMemberRemove', async member => {
 	ctx.closePath();
 	ctx.clip();
 
-	const avatar = await Canvas.loadImage(member.user.displayAvatarURL({ format: 'jpg' }));
+	const avatar = await Canvas.loadImage(member.user.displayAvatarURL({ format: 'jpg' , size: 2048}));
 	ctx.drawImage(avatar, 25, 25, 200, 200);
 
 	const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'welcome-image.png');
@@ -164,13 +167,20 @@ client.on("message", async message => {
     const embed = new Discord.MessageEmbed()
     .setAuthor("Liste d'aide", "https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Information.svg/2000px-Information.svg.png")
     .setColor("#FFD800")
-    .setDescription(`__**help**__ : Affiche la liste d'aide \n \n __**play**__ : Joue une musique d'une adresse youtube ! \n __${prefixlol}play (url)__ \n \n **__stop__** : Kick le bot d'un channel audio \n __(Il faut etre dans le meme channel)__ \n \n __**setprefix**__ : Change le prefixe \n __(Maxime deux charachétere long.)__\n \n __**ping**__ : Affiche le delais en ms \n \n __**say**__ : Fait dire un message specifique au bot \n \n __**purge**__ : Permet de supprimer les messages (jusqu'a 100) \n \n __**code**__ : Permet de consultée le code open source du bot ! \n \n __**ano**__ : Permet d'envoyer un message anonyme a quelqu'un \n __(${prefixlol}ano [Titre sans espace] [Texte])__ \n \n __**advert**__ : Permet d'envoyer une publicité \n __(${prefixlol}advert [Texte])__ \n \n **__vote__** : Permet de créer un vote \n __(${prefixlol}vote [Titre sans espace] [Texte])__ \n \n **Le préfixe est actuellemnt** ${prefixlol}`)
+    .setDescription(`__**help**__ : Affiche la liste d'aide \n \n __**play**__ : Joue une musique d'une adresse youtube ! \n __${prefixlol}play (url)__ \n \n **__stop__** : Kick le bot d'un channel audio \n __(Il faut etre dans le meme channel)__ \n \n __**setprefix**__ : Change le prefixe \n __(Maxime deux charachétere long.)__\n \n __**ping**__ : Affiche le delais en ms \n \n __**say**__ : Fait dire un message specifique au bot \n \n __**purge**__ : Permet de supprimer les messages (jusqu'a 100) \n \n __**code**__ : Permet de consultée le code open source du bot ! \n \n __**ano**__ : Permet d'envoyer un message anonyme a quelqu'un \n __(${prefixlol}ano [Titre sans espace] [Texte])__ \n \n __**advert**__ : Permet d'envoyer une publicité \n __(${prefixlol}advert [Texte])__ \n \n **__vote__** : Permet de créer un vote \n __(${prefixlol}vote [Titre sans espace] [Texte])__ \n \n **__image__** : Permet de rechercher une image \n __(${prefixlol}image [Texte])__ \n \n **__randomi__** : Permet de rechercher une image aléatoire.\n \n **Le préfixe est actuellement** ${prefixlol}`)
     .setTimestamp()
     .setFooter(client.user.username, client.user.displayAvatarURL({ dynamic: true, format: 'png', size: 1024 }))
     message.channel.send({embed});
   }
 
   if(command === "image") {
+    if(cooldown.has(message.author.id)) {
+      return errore("Tu dois attendre 10s entre chaque recherche d'image !", message);
+  } else {
+      cooldown.add(message.author.id)
+      setTimeout(() => {cooldown.delete(message.author.id)}, 10000);
+  }
+  let Timer = '10s'
     const terme = args.join(" ");
 
     let term = terme;
@@ -198,7 +208,76 @@ let response_handler = function (response) {
 
         }
         else {
-            console.log("Couldn't find image results!");
+            errore("Aucun resultat d'image !", message);
+}
+
+
+
+    });
+    response.on('error', function (e) {
+        console.log('Error: ' + e.message);
+    });
+};
+
+let bing_image_search = function (search) {
+  console.log('Searching images for: ' + term);
+  let request_params = {
+        method : 'GET',
+        hostname : host,
+        path : path + '?q=' + encodeURIComponent(search),
+        headers : {
+            'Ocp-Apim-Subscription-Key' : subscriptionKey,
+        }
+    };
+
+    let req = https.request(request_params, response_handler);
+    req.end();
+}
+
+if (subscriptionKey.length === 32) {
+    bing_image_search(term);
+} else {
+    console.log('Invalid Bing Search API subscription key!');
+    console.log('Please paste yours into the source code.');
+}
+
+  }
+
+  if(command === "randomi") {
+    if(cooldown.has(message.author.id)) {
+      return errore("Tu dois attendre 10s entre chaque recherche d'image !", message);
+  } else {
+      cooldown.add(message.author.id)
+      setTimeout(() => {cooldown.delete(message.author.id)}, 10000);
+  }
+  let Timer = '10s'
+
+    let term = randomWords();
+
+let response_handler = function (response) {
+    let body = '';
+    response.on('data', function (d) {
+        body += d;
+    });
+    response.on('end', function () {
+        let imageResults = JSON.parse(body);
+        if (imageResults.value.length > 0) {
+            let firstImageResult = imageResults.value[0];
+
+            const exampleEmbed = new Discord.MessageEmbed()
+            const embed = new Discord.MessageEmbed()
+            .setAuthor("Image Aleatoire")
+            .setTitle(firstImageResult.name)
+            .setColor(firstImageResult.accentColor)
+            .setURL(firstImageResult.contentUrl)
+            .setImage(firstImageResult.thumbnailUrl)
+            .setTimestamp(firstImageResult.datePublished)
+            .setFooter("Date de l'image", client.user.displayAvatarURL({ dynamic: true, format: 'png', size: 1024 }))
+            message.channel.send({embed});
+
+        }
+        else {
+            errore("Aucun resultat d'image !", message);
 }
 
 
@@ -270,6 +349,30 @@ if (subscriptionKey.length === 32) {
     message.delete().catch(O_o=>{}); 
     // And we get the bot to say the thing: 
     message.channel.send(sayMessage);
+  }
+
+  if(command === "profilep") {
+    const pp = args.join(" ");
+
+    if(pp === '') {
+      const embed = new Discord.MessageEmbed()
+      .setAuthor("Votre photo de profile")
+      .setColor('#FFD800')
+      .setImage(message.author.displayAvatarURL({ dynamic: true, format: 'png', size: 2048}))
+      .setTimestamp()
+      .setFooter(client.user.username, client.user.displayAvatarURL({ dynamic: true, format: 'png', size: 1024 }))
+      message.channel.send({embed});
+    } else if(message.mentions.members.first()) {
+      const embed = new Discord.MessageEmbed()
+      .setAuthor(`La photo de profile de ${message.mentions.users.first().username}`)
+      .setColor('#FFD800')
+      .setImage(message.mentions.users.first().displayAvatarURL({ dynamic: true, format: 'png', size: 2048}))
+      .setTimestamp()
+      .setFooter(client.user.username, client.user.displayAvatarURL({ dynamic: true, format: 'png', size: 1024 }))
+      message.channel.send({embed});
+    } else {
+      errore("Merci d'indiquer un utilisateur valide !", message);
+    }
   }
   
 
@@ -436,6 +539,20 @@ if(command === "stop") {
 
 
 }
+
+if(command === "joined") {
+  if (!message.author.username === "Wily") {
+    return errore("T'essaye de faire quoi la ?", message);
+  } else {
+    client.emit('guildMemberAdd', message.member);
+  }
+
+
+
+}
+
+
+
 
 
 
