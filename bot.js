@@ -2,7 +2,7 @@
 const Discord = require('discord.js');
 const ytdl = require('ytdl-core');
 const Canvas = require('canvas');
-const config = require('config');
+const config = require("./config.json");
 
 prefixlol = "p"
 let token = config.token;
