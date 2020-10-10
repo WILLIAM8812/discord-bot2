@@ -2,7 +2,17 @@
 const Discord = require('discord.js');
 const ytdl = require('ytdl-core');
 const Canvas = require('canvas');
-const config = require("./config.json");
+const config = require("./config.json")
+
+'use strict';
+let https = require('https');
+
+let subscriptionKey = 'enter key here';
+let host = 'api.cognitive.microsoft.com';
+let path = '/bing/v7.0/images/search';
+let term = 'tropical ocean';
+
+
 
 prefixlol = "p"
 let token = config.token;
@@ -158,6 +168,37 @@ client.on("message", async message => {
     .setTimestamp()
     .setFooter(client.user.username, client.user.displayAvatarURL({ dynamic: true, format: 'png', size: 1024 }))
     message.channel.send({embed});
+  }
+
+  if(command === "image") {
+    let request_params = {
+      method : 'GET',
+      hostname : host,
+      path : path + '?q=' + encodeURIComponent(search),
+      headers : {
+      'Ocp-Apim-Subscription-Key' : subscriptionKey,
+      }
+  };
+
+  let req = https.request(request_params, response_handler);
+  req.end();
+
+  let response_handler = function (response) {
+    let body = '';
+  };
+    
+  response.on('data', function (d) {
+    body += d;
+});
+
+response.on('end', function () {
+  let firstImageResult = imageResults.value[0];
+  console.log(`Image result count: ${imageResults.value.length}`);
+  console.log(`First image thumbnail url: ${firstImageResult.thumbnailUrl}`);
+  console.log(`First image web search url: ${firstImageResult.webSearchUrl}`);
+});
+
+
   }
 
   if(command === "setprefix") {
@@ -379,4 +420,6 @@ function errore(description, message) {
   .setFooter(client.user.username, client.user.displayAvatarURL({ dynamic: true, format: 'png', size: 1024 }))
   message.channel.send({embed});
 }
+
+
 
