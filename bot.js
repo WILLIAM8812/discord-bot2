@@ -193,7 +193,7 @@ let response_handler = function (response) {
             .setURL(firstImageResult.contentUrl)
             .setImage(firstImageResult.thumbnailUrl)
             .setTimestamp(firstImageResult.datePublished)
-            .setFooter(client.user.username, client.user.displayAvatarURL({ dynamic: true, format: 'png', size: 1024 }))
+            .setFooter("Date de l'image", client.user.displayAvatarURL({ dynamic: true, format: 'png', size: 1024 }))
             message.channel.send({embed});
 
         }
