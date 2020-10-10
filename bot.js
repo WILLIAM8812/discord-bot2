@@ -4,6 +4,16 @@ const ytdl = require('ytdl-core');
 const Canvas = require('canvas');
 const randomWords = require('random-words');
 const config = require("./config.json")
+/// The list of npm needed :
+
+/// npm i discord.js/@opus
+/// npm i sodium 
+/// npm i ffmpeg-static
+/// npm i ytdl-core
+/// npm i canvas
+/// npm i request
+/// npm i request
+
 
 'use strict';
 let https = require('https');
