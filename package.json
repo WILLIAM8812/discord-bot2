@@ -14,7 +14,7 @@
     "ffmpeg-static": "^4.2.7",
     "mongodb": "^3.5.8",
     "ms": "^2.1.2",
-    "random-words": "^1.1.1",
+    "random-words": "^1.2.0",
     "request": "^2.81.0",
     "ytdl-core": "^3.3.0"
   }
